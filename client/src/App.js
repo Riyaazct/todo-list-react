@@ -1,9 +1,9 @@
-import TitleBar from "./components/TitleBar";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div className="App">
-      <TitleBar />
+      <NavBar />
     </div>
   );
 }
