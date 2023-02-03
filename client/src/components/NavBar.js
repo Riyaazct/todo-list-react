@@ -12,7 +12,27 @@ const NavBar = () => {
   return (
     <div className="w-screen bg-blue-300">
       <div className="">
-        <h1 className="text-2xl">My Todo App</h1>
+        <div className="p-2">
+          <h1 className="text-2xl font-bold">My Todo App</h1>
+          <BiMenuAltRight
+            className={
+              !isActive
+                ? "absolute top-1 right-0 cursor-pointer"
+                : "hidden"
+            }
+            onClick={handleClick}
+            size={35}
+          />
+          <MdClose
+            className={
+              isActive
+                ? "absolute top-1 right-0 cursor-pointer"
+                : "hidden"
+            }
+            onClick={handleClick}
+            size={35}
+          />
+        </div>
         <div
           className={
             isActive ? "w-screen text-center relative" : "hidden"
@@ -24,24 +44,6 @@ const NavBar = () => {
           <li>Settings</li>
           <li>About</li>
         </div>
-        <BiMenuAltRight
-          className={
-            !isActive
-              ? "absolute top-0 right-0 cursor-pointer"
-              : "hidden"
-          }
-          onClick={handleClick}
-          size={30}
-        />
-        <MdClose
-          className={
-            isActive
-              ? "absolute top-0 right-0 cursor-pointer"
-              : "hidden"
-          }
-          onClick={handleClick}
-          size={30}
-        />
       </div>
     </div>
   );
