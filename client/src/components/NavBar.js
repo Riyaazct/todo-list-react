@@ -10,7 +10,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-screen bg-blue-300 md:flex justify-around">
+    <div className="w-screen bg-gray-200 border-b-2 border-gray-300 md:flex justify-around">
       <h1 className="text-gray-900 p-3 text-2xl font-bold md:mt-2 lg:text-3xl ">
         My Todo App
       </h1>
@@ -40,12 +40,12 @@ const NavBar = () => {
             : "hidden md:flex md:p-5 "
         }
       >
-        <ul className="md:flex">
+        <ul className="md:flex relative right-0">
           <li className="p-1 text-gray-900 md:text-xl md:mx-5">
             Home
           </li>
           <li className="p-1 text-gray-900 md:text-xl md:mx-5">
-            Catagories
+            Categories
           </li>
           <li className="p-1  text-gray-900 md:text-xl md:ml-5">
             Completed Tasks
