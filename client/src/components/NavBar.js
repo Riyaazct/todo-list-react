@@ -11,24 +11,26 @@ const NavBar = () => {
 
   return (
     <div className="w-screen bg-blue-300 md:flex justify-around">
-      <h1 className="p-2 text-2xl font-bold lg:mt-3 ">My Todo App</h1>
+      <h1 className="text-gray-900 p-3 text-2xl font-bold md:mt-2 lg:text-3xl ">
+        My Todo App
+      </h1>
       <BiMenuAltRight
         className={
           !isActive
-            ? "absolute top-1 right-0 cursor-pointer md:hidden"
+            ? "absolute top-2 right-0 cursor-pointer md:hidden"
             : "hidden"
         }
         onClick={handleClick}
-        size={35}
+        size={40}
       />
       <MdClose
         className={
           isActive
-            ? "absolute top-1 right-0 cursor-pointer md:hidden"
+            ? "absolute top-2 right-0 cursor-pointer md:hidden"
             : "hidden"
         }
         onClick={handleClick}
-        size={35}
+        size={40}
       />
 
       <div
@@ -39,13 +41,13 @@ const NavBar = () => {
         }
       >
         <ul className="md:flex">
-          <li className="p-1  text-gray-900 md:text-lg md:mx-5">
+          <li className="p-1 text-gray-900 md:text-xl md:mx-5">
             Home
           </li>
-          <li className="p-1  text-gray-900 md:text-lg md:mx-5">
+          <li className="p-1 text-gray-900 md:text-xl md:mx-5">
             Catagories
           </li>
-          <li className="p-1  text-gray-900 md:text-lg md:ml-5">
+          <li className="p-1  text-gray-900 md:text-xl md:ml-5">
             Completed Tasks
           </li>
         </ul>
