@@ -10,40 +10,40 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-screen bg-blue-300">
-      <div className="">
-        <div className="p-2">
-          <h1 className="text-2xl font-bold">My Todo App</h1>
-          <BiMenuAltRight
-            className={
-              !isActive
-                ? "absolute top-1 right-0 cursor-pointer"
-                : "hidden"
-            }
-            onClick={handleClick}
-            size={35}
-          />
-          <MdClose
-            className={
-              isActive
-                ? "absolute top-1 right-0 cursor-pointer"
-                : "hidden"
-            }
-            onClick={handleClick}
-            size={35}
-          />
-        </div>
-        <div
+    <div className="w-screen bg-blue-300 md:flex justify-around">
+      <div className="p-3">
+        <h1 className="text-2xl font-bold">My Todo App</h1>
+        <BiMenuAltRight
           className={
-            isActive ? "w-screen text-center relative" : "hidden"
+            !isActive
+              ? "absolute top-1 right-0 cursor-pointer md:hidden"
+              : "hidden"
           }
-        >
-          <li>Home</li>
-          <li>Catagories</li>
-          <li>Completed Tasks</li>
-          <li>Settings</li>
-          <li>About</li>
-        </div>
+          onClick={handleClick}
+          size={35}
+        />
+        <MdClose
+          className={
+            isActive
+              ? "absolute top-1 right-0 cursor-pointer md:hidden"
+              : "hidden"
+          }
+          onClick={handleClick}
+          size={35}
+        />
+      </div>
+      <div
+        className={
+          isActive
+            ? " text-center relative "
+            : "hidden md:flex md:p-5 md:w-auto"
+        }
+      >
+        <li className="px-4 text-gray-900">Home</li>
+        <li className="px-4 text-gray-900">Catagories</li>
+        <li className="px-4 text-gray-900">Completed Tasks</li>
+        <li className="px-4 text-gray-900">Settings</li>
+        <li className="px-4 text-gray-900">About</li>
       </div>
     </div>
   );
