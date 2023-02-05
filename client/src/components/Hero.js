@@ -3,7 +3,8 @@ import React from "react";
 const Hero = () => {
   return (
     <div>
-      <input type="text" />
+      <label htmlFor="input"></label>
+      <input type="text" id="input" />
     </div>
   );
 };
