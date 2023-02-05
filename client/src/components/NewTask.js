@@ -2,7 +2,7 @@ import React from "react";
 
 const NewTask = () => {
   return (
-    <div className="h-screen w-auto p-4 bg-blue-500">
+    <div className="h-full w-auto p-4">
       <div className="w-full h-full text-center">
         <form>
           <label className="text-lg font-" htmlFor="input">
