@@ -1,11 +1,11 @@
 import NavBar from "./components/NavBar";
-import Hero from "./components/Hero";
+import NewTask from "./components/NewTask";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <Hero />
+      <NewTask />
     </div>
   );
 }
