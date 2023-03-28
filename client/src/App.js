@@ -4,7 +4,7 @@ import Tasks from "./components/Tasks";
 
 function App() {
   return (
-    <div className="App ">
+    <div>
       <NavBar />
       <NewTask />
       <Tasks />

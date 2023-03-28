@@ -2,19 +2,20 @@ import React from "react";
 
 const NewTask = () => {
   return (
-    <div className="h-full w-auto p-4">
-      <div className="w-full h-full text-center">
-        <form>
-          <label className="text-lg font-" htmlFor="input">
-            Add New Task
-            <input
-              className="w-full h-10 rounded-md"
-              type="text"
-              id="input"
-            />
-          </label>
+    <div>
+      <div className="w-full h-full text-center mt-[50px]">
+        <form className="container" action="submit">
+          <input
+            className="w-full h-10 rounded-md p-2 placeholder:italic"
+            type="text"
+            id="input"
+            placeholder="Add task"
+          />
         </form>
-        <button className="mt-2 w-full hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700">
+        <button
+          className="mt-2 w-full hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
+          type="submit"
+        >
           Add Task
         </button>
       </div>
