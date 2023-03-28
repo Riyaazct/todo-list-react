@@ -6,4 +6,7 @@
   button {
     @apply bg-blue-700 py-1 rounded-lg w-[100px] border-black border-[1px];
   }
+  body {
+    @apply bg-blue-500 text-gray-900;
+  }
 }

@@ -11,7 +11,7 @@ const NavBar = () => {
 
   return (
     <div className="w-screen bg-gray-200 border-b-2 border-gray-300 md:flex justify-around">
-      <h1 className="text-gray-900 p-3 text-2xl font-bold md:mt-2 lg:text-3xl ">
+      <h1 className="text-blue-600 p-3 text-2xl font-bold md:mt-2 lg:text-3xl ">
         My Todo App
       </h1>
       <BiMenuAltRight
