@@ -7,15 +7,35 @@ const Tasks = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/data")
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getTodos();
+    // axios
+    //   .get("/api/data")
+    //   .then((res) => {
+    //     setData(res.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }, []);
+  const getTodos = async () => {
+    try {
+      const response = await axios.get("/api/data");
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/data/${id}`);
+      setData(data.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+    // let result = data.filter((task) => task.id !== id);
+    // setData(result);
+  };
 
   return (
     <div>
@@ -23,17 +43,24 @@ const Tasks = () => {
         TODOS
       </h2>
       <div className="w-full bg-gray-200 border-gray-300 border-2 h-full m-auto rounded-xl p-4">
-        {data.map(({ task }, i) => (
-          <div className="flex" key={i}>
-            <p className="text-2xl">{task}</p>
-            <div className="ml-auto flex gap-2">
+        {data.map(({ task, id }, index) => (
+          <div className="flex items-center gap-2" key={id}>
+            <p className="text-2xl my-1">{`${index + 1}.`}</p>
+            <p className="text-2xl my-1">{task}</p>
+            <div
+              className="ml-auto flex gap-2"
+              onClick={() => handleDelete(id)}
+            >
               <FiDelete size={20} />
               <AiOutlineEdit size={20} />
             </div>
           </div>
         ))}
-        <div className="flex items-center justify-end gap-2 text-xl">
-          <p>Clear list</p>
+        <div
+          className="flex items-center gap-1 text-md border-solid border-[1px] border-blue-600 w-max ml-auto p-1 border-opacity-40 rounded-md
+                         bg-blue-200 hover:border-blue-200 hover:bg-blue-600 hover:text-blue-200 md:text-lg lg:text-xl"
+        >
+          <p>Clear</p>
           <AiOutlineClear />
         </div>
       </div>
