@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import dummyData from "../dummyData.json";
+// import dummyData from "../dummyData.json";
 
 const Tasks = () => {
-  const [data, setData] = useState(dummyData);
+  // const [data, setData] = useState(dummyData);
 
   return (
     <div>
@@ -10,7 +10,7 @@ const Tasks = () => {
         Tasks
       </h2>
       <div className="w-full bg-gray-200 border-gray-300 border-2 h-full m-auto rounded-xl p-4">
-        {/* Create cards for the tasks */}
+        {/* {data.map()} */}
       </div>
     </div>
   );
