@@ -4,7 +4,7 @@ const NewTask = () => {
   return (
     <div>
       <div className="w-full h-full text-center mt-[50px]">
-        <form className="container" action="submit">
+        <form action="submit">
           <input
             className="w-full h-10 rounded-md p-2 placeholder:italic"
             type="text"

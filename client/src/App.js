@@ -4,10 +4,12 @@ import Tasks from "./components/Tasks";
 
 function App() {
   return (
-    <div>
+    <div className="">
       <NavBar />
-      <NewTask />
-      <Tasks />
+      <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
+        <NewTask />
+        <Tasks />
+      </div>
     </div>
   );
 }
