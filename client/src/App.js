@@ -4,7 +4,7 @@ import Tasks from "./components/Tasks";
 
 function App() {
   return (
-    <div className="App bg-blue-500 h-full">
+    <div className="App ">
       <NavBar />
       <NewTask />
       <Tasks />
