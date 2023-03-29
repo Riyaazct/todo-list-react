@@ -80,7 +80,7 @@ app.post("/api/data", (req, res) => {
     return res.status(400).send("Task could not be saved");
   } else {
     tasks.push(newTask);
-    res.send(tasks);
+    res.send(`"${newTask.task}" successfully added!`);
     console.log(
       `Task "${newTask.task}" with id:${newTask.id} created successfully!`
     );
