@@ -3,20 +3,11 @@ import axios from "axios";
 import { FiDelete } from "react-icons/fi";
 import { AiOutlineEdit, AiOutlineClear } from "react-icons/ai";
 
-const Tasks = () => {
-  const [data, setData] = useState([]);
-
+const Tasks = ({ data, setData }) => {
   useEffect(() => {
     getTodos();
-    // axios
-    //   .get("/api/data")
-    //   .then((res) => {
-    //     setData(res.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }, []);
+
   const getTodos = async () => {
     try {
       const response = await axios.get("/api/data");
@@ -48,7 +39,7 @@ const Tasks = () => {
             <p className="text-2xl my-1">{`${index + 1}.`}</p>
             <p className="text-2xl my-1">{task}</p>
             <div
-              className="ml-auto flex gap-2"
+              className="ml-auto flex gap-2 cursor-pointer"
               onClick={() => handleDelete(id)}
             >
               <FiDelete size={20} />
@@ -58,7 +49,7 @@ const Tasks = () => {
         ))}
         <div
           className="flex items-center gap-1 text-md border-solid border-[1px] border-blue-600 w-max ml-auto p-1 border-opacity-40 rounded-md
-                         bg-blue-200 hover:border-blue-200 hover:bg-blue-600 hover:text-blue-200 md:text-lg lg:text-xl"
+                         bg-blue-200 hover:border-blue-700 bg-opacity-60 hover:bg-opacity-90 md:text-lg lg:text-xl"
         >
           <p>Clear</p>
           <AiOutlineClear />

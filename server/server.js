@@ -5,6 +5,7 @@ const port = process.env.PORT || 3100;
 
 app.use(express.json());
 app.use(cors());
+// app.use(express.urlencoded({ extended: false }));
 
 let tasks = [
   {
@@ -67,6 +68,22 @@ app.delete("/api/data/:id", (req, res) => {
     res.json((tasks = tasks.filter((item) => item.id !== taskId)));
   } else {
     res.status(404).json({ msg: `No task with id ${taskId} found` });
+  }
+});
+
+app.post("/api/data", (req, res) => {
+  const id = tasks.length + 1;
+  const task = req.body.task;
+  const newTask = { id, task };
+
+  if (task === "") {
+    return res.status(400).send("Task could not be saved");
+  } else {
+    tasks.push(newTask);
+    res.send(tasks);
+    console.log(
+      `Task "${newTask.task}" with id:${newTask.id} created successfully!`
+    );
   }
 });
 
