@@ -5,8 +5,10 @@ import NewTask from "./components/NewTask";
 import Tasks from "./components/Tasks";
 
 function App() {
-  const url = "http://localhost:3100/api/data";
   const [data, setData] = useState([]);
+
+  // URL
+  const url = "http://localhost:3100/api/data";
 
   useEffect(() => {
     getTodos();

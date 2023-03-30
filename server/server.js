@@ -7,60 +7,28 @@ app.use(express.json());
 app.use(cors());
 // app.use(express.urlencoded({ extended: false }));
 
-let tasks = [
-  {
-    id: 1,
-    task: "Clean my room",
-  },
-  {
-    id: 2,
-    task: "Wash the car",
-  },
-  {
-    id: 3,
-    task: "Study some JavaScript",
-  },
-  {
-    id: 4,
-    task: "Work on my projects",
-  },
-  {
-    id: 5,
-    task: "go to gym",
-  },
-  {
-    id: 6,
-    task: "Go for a run",
-  },
-  {
-    id: 7,
-    task: "Pray",
-  },
-  {
-    id: 8,
-    task: "read",
-  },
-  {
-    id: 9,
-    task: "walk",
-  },
-];
+let tasks = require("./data/tasks.json");
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-//GET ALL DATA
+//GET ALL DATA FOR DATA STORED IN MEMORY ON API
 app.get("/api/data", (req, res) => {
   res.json(tasks);
 });
 
-// GET BY ID
+// GET  TASK BY ID FOR DATA STORED IN MEMORY ON API
 app.get("/api/data/:id", (req, res) => {
   let taskId = parseInt(req.params.id);
-  res.send(tasks.find((elem) => elem.id === taskId));
+  const found = tasks.find((task) => task.id === taskId);
+  if (found) {
+    res.send(tasks.filter((item) => item.id === taskId));
+  } else {
+    res.status(404).json({ msg: `No task with id ${taskId} found` });
+  }
 });
 
-// //DELETE
+// //DELETE FOR DATA STORED IN MEMORY ON API
 app.delete("/api/data/:id", (req, res) => {
   let taskId = parseInt(req.params.id);
   let found = tasks.some((task) => task.id === taskId);
@@ -71,8 +39,9 @@ app.delete("/api/data/:id", (req, res) => {
   }
 });
 
+//CREATE NEW TODO FOR DATA STORED IN MEMORY ON API
 app.post("/api/data", (req, res) => {
-  const id = tasks.length + 1;
+  const id = tasks.length - 1;
   const task = req.body.task;
   const newTask = { id, task };
 
@@ -84,6 +53,23 @@ app.post("/api/data", (req, res) => {
     console.log(
       `Task "${newTask.task}" with id:${newTask.id} created successfully!`
     );
+  }
+});
+
+// EDIT A TODO FOR DATA STORED IN MEMORY ON API
+app.put("/api/data/:id", (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+  if (taskIndex !== -1) {
+    const updatedTask = {
+      id: taskId,
+      task: req.body.task,
+    };
+    tasks[taskIndex] = updatedTask;
+    res.json(updatedTask);
+  } else {
+    res.status(404).json({ msg: `No task with id ${taskId} found` });
   }
 });
 

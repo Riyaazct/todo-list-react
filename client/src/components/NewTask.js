@@ -8,23 +8,25 @@ const NewTask = ({ data, setData, url, getTodos }) => {
   // HANDLE BUTTON CLICK FUNCTION
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(url, { task: captured })
-      .then((response) => {
-        getTodos();
-        setCaptured("");
-        setTimeout(clearCaptured, 6000);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    console.log(e);
+    if (e.keyCode === 13) {
+      axios
+        .post(url, { task: captured })
+        .then((response) => {
+          getTodos();
+          setCaptured("");
+          setTimeout(clearCaptured, 6000);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
     <div>
       <div className="w-full h-full text-center mt-[50px]">
-        <form action="submit">
+        <form>
           <input
             className="w-full h-10 rounded-md p-2 placeholder:italic bg-gray-200 placeholder:text-black font-semibold focus:outline-none "
             type="text"
@@ -33,6 +35,7 @@ const NewTask = ({ data, setData, url, getTodos }) => {
             value={captured}
             // ONCHANGE CHANGE EVENT
             onChange={(e) => setCaptured(e.target.value)}
+            onKeyDown={(e) => handleSubmit(e)}
           />
         </form>
         <button
