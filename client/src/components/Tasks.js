@@ -26,6 +26,7 @@ const Tasks = ({ data, setData, url, id }) => {
               <EditMode
                 setEditing={setEditing}
                 currentText={currentText}
+                setCurrentText={setCurrentText}
               />
             ) : (
               <p className="w-full md:text-xl my-1">{task}</p>
