@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "task": "Clean my room"
+  },
+  {
+    "id": 2,
+    "task": "Wash the car"
+  },
+  {
+    "id": 3,
+    "task": "Study some JavaScript"
+  },
+  {
+    "id": 4,
+    "task": "Work on my projects"
+  },
+  {
+    "id": 5,
+    "task": "go to gym"
+  },
+  {
+    "id": 6,
+    "task": "Go for a run"
+  },
+  {
+    "id": 7,
+    "task": "Pray"
+  }
+]
