@@ -33,7 +33,12 @@ function App() {
           url={url}
           getTodos={getTodos}
         />
-        <Tasks data={data} setData={setData} url={url} />
+        <Tasks
+          data={data}
+          setData={setData}
+          url={url}
+          getTodos={getTodos}
+        />
       </div>
     </div>
   );

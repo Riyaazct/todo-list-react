@@ -3,7 +3,6 @@ import axios from "axios";
 
 const NewTask = ({ data, setData, url, getTodos }) => {
   const [captured, setCaptured] = useState("");
-  const clearCaptured = () => setCaptured("");
 
   // HANDLE BUTTON CLICK FUNCTION
 
@@ -13,7 +12,6 @@ const NewTask = ({ data, setData, url, getTodos }) => {
       .then((response) => {
         getTodos();
         setCaptured("");
-        setTimeout(clearCaptured, 6000);
       })
       .catch((error) => {
         console.error(error);

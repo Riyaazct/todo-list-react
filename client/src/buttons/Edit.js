@@ -2,12 +2,8 @@ import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 
 const Edit = ({
-  data,
-  setData,
-  url,
   id,
   setEditing,
-  editing,
   setIdForEditing,
   setCurrentText,
   task,

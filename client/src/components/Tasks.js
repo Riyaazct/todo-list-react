@@ -5,7 +5,7 @@ import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Tasks = ({ data, setData, url, id }) => {
+const Tasks = ({ data, setData, url, id, getTodos }) => {
   // set editmode
   const [editing, setEditing] = useState(false);
   //id for identifying which line to render the input for editing
@@ -27,6 +27,10 @@ const Tasks = ({ data, setData, url, id }) => {
                 setEditing={setEditing}
                 currentText={currentText}
                 setCurrentText={setCurrentText}
+                id={id}
+                data={data}
+                setData={setData}
+                url={url}
               />
             ) : (
               <p className="w-full md:text-xl my-1">{task}</p>
@@ -37,14 +41,11 @@ const Tasks = ({ data, setData, url, id }) => {
                 setData={setData}
                 url={url}
                 id={id}
+                getTodos={getTodos}
               />
               <Edit
-                data={data}
-                setData={setData}
-                url={url}
                 id={id}
                 setEditing={setEditing}
-                editing={editing}
                 setIdForEditing={setIdForEditing}
                 setCurrentText={setCurrentText}
                 task={task}

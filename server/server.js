@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 3100;
+const { v4: uuidv4 } = require("uuid");
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.urlencoded({ extended: false }));
 
 let tasks = require("./data/tasks.json");
 
@@ -49,7 +49,7 @@ app.post("/api/data", (req, res) => {
     return res.status(400).send("Task could not be saved");
   } else {
     tasks.push(newTask);
-    res.send(`"${newTask.task}" successfully added!`);
+    res.send(tasks);
     console.log(
       `Task "${newTask.task}" with id:${newTask.id} created successfully!`
     );
