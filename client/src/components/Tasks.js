@@ -5,7 +5,15 @@ import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Tasks = ({ data, setData, url, id, getTodos }) => {
+const Tasks = ({
+  data,
+  setData,
+  url,
+  id,
+  getTodos,
+  listIsEmpty,
+  setListIsEmpty,
+}) => {
   // set editmode
   const [editing, setEditing] = useState(false);
   //id for identifying which line to render the input for editing
@@ -42,6 +50,8 @@ const Tasks = ({ data, setData, url, id, getTodos }) => {
                 url={url}
                 id={id}
                 getTodos={getTodos}
+                listIsEmpty={listIsEmpty}
+                setListIsEmpty={setListIsEmpty}
               />
               <Edit
                 id={id}
@@ -54,7 +64,7 @@ const Tasks = ({ data, setData, url, id, getTodos }) => {
           </div>
         ))}
       </div>
-      <ClearList />
+      {data.length > 0 ? <ClearList /> : null}
     </div>
   );
 };
