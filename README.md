@@ -8,14 +8,18 @@ The EduFocus Projects web application is a full-stack web application built usin
 
 ### Features
 
+- Pages, including a header and footer, consisting of the following: Home, About Us,Our People, Our Photos and Contact Us
 - User authentication and authorization
-- Dashboard for users to view their progress and access course materials
-- Admin panel for managing courses and users
+- Admin panel for managing course material
 - Integration with a PostgreSQL database
 - Responsive design for mobile and desktop devices
+- Contact form for general enquiries or to donate or take part in events
+- Image gallery for showcasing photos of events and activities.
+
 
 ## Technologies Used
 
+- JavaScript
 - Node.js
 - React
 - Express
