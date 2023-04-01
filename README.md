@@ -39,13 +39,11 @@ To get started with the project, clone this repository and follow the steps belo
 
 ## Contributing
 
-We welcome contributions from the community! To contribute to this project, please follow these steps:
+Thanks for your interest in our project! However, we are not currently accepting contributions at this time.
 
-1. Fork this repository to your own GitHub account and then clone it to your local device.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with descriptive commit messages.
-4. Push your changes to your forked repository.
-5. Open a pull request from your branch to this repository's master branch.
+If you have any suggestions or feedback, feel free to reach out to the project members listed above. We'd love to hear from you!
+
+
 
 ## Credits
 
