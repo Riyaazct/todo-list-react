@@ -49,10 +49,10 @@ If you have any suggestions or feedback, feel free to reach out to the project m
 
 This project was developed by the following team members:
 
-- [Member 1](https://github.com/member1)
-- [Member 2](https://github.com/member2)
-- [Member 3](https://github.com/member3)
-- [Member 4](https://github.com/member4) 
+- [Catalina-Alexandra Jora](https://github.com/AlexJora)
+- [Chandré De Wet](https://github.com/chandredewet)
+- [Advocate Maroga](https://github.com/AdvocateM)
+- [Riyaaz Singh](https://github.com/Riyaazct) 
 
 Special thanks to CodeYourFuture and NGO Partner for providing support and guidance throughout the development process.
 
