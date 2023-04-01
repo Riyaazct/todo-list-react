@@ -41,7 +41,7 @@ app.delete("/api/data/:id", (req, res) => {
 
 //CREATE NEW TODO FOR DATA STORED IN MEMORY ON API
 app.post("/api/data", (req, res) => {
-  const id = uuidv4(); //tasks.length - 1;
+  const id = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
   const task = req.body.task;
   const newTask = { id, task };
 
