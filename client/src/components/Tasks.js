@@ -3,17 +3,8 @@ import ClearList from "../buttons/ClearList";
 import Delete from "../buttons/Delete";
 import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
-import { AiOutlineClose } from "react-icons/ai";
 
-const Tasks = ({
-  data,
-  setData,
-  url,
-  id,
-  getTodos,
-  listIsEmpty,
-  setListIsEmpty,
-}) => {
+const Tasks = ({ data, setData, url, id, getTodos }) => {
   // set editmode
   const [editing, setEditing] = useState(false);
   //id for identifying which line to render the input for editing
@@ -27,9 +18,12 @@ const Tasks = ({
         TODOS
       </h2>
       <div className="w-full h-auto bg-gray-200 border-gray-300 border-2 m-auto rounded-xl p-4">
+        {/*RENDER THE DATA*/}
         {data.map(({ task, id }, index) => (
-          <div className="flex items-center gap-2" key={id}>
+          <div className="flex items-center gap-2" key={index}>
             <p className=" md:text-2xl my-1">{`${index + 1}.`}</p>
+
+            {/* render input for editing a task if selected */}
             {editing && id === idForEditing ? (
               <EditMode
                 setEditing={setEditing}
@@ -50,8 +44,6 @@ const Tasks = ({
                 url={url}
                 id={id}
                 getTodos={getTodos}
-                listIsEmpty={listIsEmpty}
-                setListIsEmpty={setListIsEmpty}
               />
               <Edit
                 id={id}
@@ -64,7 +56,10 @@ const Tasks = ({
           </div>
         ))}
       </div>
-      {data.length > 0 ? <ClearList /> : null}
+      {/* IF TASKS EXIST, SHOW BUTTON, ELSE DON'T */}
+      {data.length ? (
+        <ClearList getTodos={getTodos} url={url} setData={setData} />
+      ) : null}
     </div>
   );
 };

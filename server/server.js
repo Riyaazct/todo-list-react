@@ -41,7 +41,7 @@ app.delete("/api/data/:id", (req, res) => {
 
 //CREATE NEW TODO FOR DATA STORED IN MEMORY ON API
 app.post("/api/data", (req, res) => {
-  const id = tasks.length - 1;
+  const id = uuidv4(); //tasks.length - 1;
   const task = req.body.task;
   const newTask = { id, task };
 
@@ -71,6 +71,13 @@ app.put("/api/data/:id", (req, res) => {
   } else {
     res.status(404).json({ msg: `No task with id ${taskId} found` });
   }
+});
+
+//DELETE ALL TODOS IN LIST
+
+app.delete("/api/data", (req, res) => {
+  tasks = [];
+  res.json({ msg: "all tasks deleted" });
 });
 
 app.listen(port, () => {

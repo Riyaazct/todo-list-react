@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const NewTask = ({
-  data,
-  setData,
-  url,
-  getTodos,
-  listIsEmpty,
-  setListIsEmpty,
-}) => {
+const NewTask = ({ data, setData, url, getTodos }) => {
   const [captured, setCaptured] = useState("");
 
   // HANDLE BUTTON CLICK FUNCTION
