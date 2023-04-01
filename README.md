@@ -51,7 +51,7 @@ We welcome contributions from the community! To contribute to this project, plea
 
 This project was developed by the following team members:
 
-- Developer 1
+- @riyaazct
 - Developer 2
 - Developer 3
 - Developer 4
