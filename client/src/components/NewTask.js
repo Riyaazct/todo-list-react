@@ -3,24 +3,19 @@ import axios from "axios";
 
 const NewTask = ({ data, setData, url, getTodos }) => {
   const [captured, setCaptured] = useState("");
-  const clearCaptured = () => setCaptured("");
 
   // HANDLE BUTTON CLICK FUNCTION
 
   const handleSubmit = (e) => {
-    console.log(e);
-    if (e.keyCode === 13) {
-      axios
-        .post(url, { task: captured })
-        .then((response) => {
-          getTodos();
-          setCaptured("");
-          setTimeout(clearCaptured, 6000);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    axios
+      .post(url, { task: captured })
+      .then((response) => {
+        getTodos();
+        setCaptured("");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -35,7 +30,6 @@ const NewTask = ({ data, setData, url, getTodos }) => {
             value={captured}
             // ONCHANGE CHANGE EVENT
             onChange={(e) => setCaptured(e.target.value)}
-            onKeyDown={(e) => handleSubmit(e)}
           />
         </form>
         <button

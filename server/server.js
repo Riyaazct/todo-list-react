@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 3100;
+const { v4: uuidv4 } = require("uuid");
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.urlencoded({ extended: false }));
 
 let tasks = require("./data/tasks.json");
 
@@ -41,7 +41,7 @@ app.delete("/api/data/:id", (req, res) => {
 
 //CREATE NEW TODO FOR DATA STORED IN MEMORY ON API
 app.post("/api/data", (req, res) => {
-  const id = tasks.length - 1;
+  const id = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
   const task = req.body.task;
   const newTask = { id, task };
 
@@ -49,7 +49,7 @@ app.post("/api/data", (req, res) => {
     return res.status(400).send("Task could not be saved");
   } else {
     tasks.push(newTask);
-    res.send(`"${newTask.task}" successfully added!`);
+    res.send(tasks);
     console.log(
       `Task "${newTask.task}" with id:${newTask.id} created successfully!`
     );
@@ -71,6 +71,13 @@ app.put("/api/data/:id", (req, res) => {
   } else {
     res.status(404).json({ msg: `No task with id ${taskId} found` });
   }
+});
+
+//DELETE ALL TODOS IN LIST
+
+app.delete("/api/data", (req, res) => {
+  tasks = [];
+  res.json({ msg: "all tasks deleted" });
 });
 
 app.listen(port, () => {
