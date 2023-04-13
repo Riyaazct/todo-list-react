@@ -8,7 +8,7 @@ function App() {
   const [data, setData] = useState([]);
 
   // URL
-  const url = "https://react-todo-list-d87e.onrender.com";
+  const url = "https://react-todo-list-d87e.onrender.com/api/data";
 
   useEffect(() => {
     getTodos();
