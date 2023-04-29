@@ -40,14 +40,14 @@ const NavBar = () => {
             : "hidden md:flex md:p-5 "
         }
       >
-        <ul className="md:flex relative right-0">
-          <li className="p-1 text-gray-900 md:text-xl md:mx-5">
+        <ul className="md:flex ">
+          <li className="text-2xl p-1 text-gray-900 md:text-xl md:mx-5">
             Home
           </li>
-          <li className="p-1 text-gray-900 md:text-xl md:mx-5">
+          <li className="text-2xl p-1 text-gray-900 md:text-xl md:mx-5">
             Categories
           </li>
-          <li className="p-1  text-gray-900 md:text-xl md:ml-5">
+          <li className="text-2xl p-1  text-gray-900 md:text-xl md:ml-5">
             Completed Tasks
           </li>
         </ul>
