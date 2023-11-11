@@ -8,7 +8,8 @@ function App() {
   const [data, setData] = useState([]);
 
   // URL
-  const url = "https://react-todo-list-d87e.onrender.com/api/data";
+  // const url = "https://react-todo-list-d87e.onrender.com/api/data";
+  const url = "https://long-ruby-dhole-hat.cyclic.app/";
 
   useEffect(() => {
     getTodos();
