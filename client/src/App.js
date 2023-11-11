@@ -9,7 +9,7 @@ function App() {
 
   // URL
   // const url = "https://react-todo-list-d87e.onrender.com/api/data";
-  const url = "https://long-ruby-dhole-hat.cyclic.app/";
+  const url = "https://long-ruby-dhole-hat.cyclic.app/api/data";
 
   useEffect(() => {
     getTodos();
