@@ -90,3 +90,67 @@ exports.signup = async (req, res) => {
     });
   }
 };
+
+// Login Route
+
+exports.signin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if email exists within database
+    const query = {
+      text: "SELECT * FROM users WHERE email = $1",
+      values: [email],
+    };
+
+    const { rows } = await db.query(query);
+
+    if (rows.length === 0) {
+      return res
+        .status(404)
+        .send({ message: "Email not registered." });
+    }
+
+    const user = rows[0];
+
+    // validate password against stored hash in database
+    const passwordIsValid = bcrypt.compareSync(
+      password,
+      user.password
+    );
+
+    if (!passwordIsValid) {
+      return res.status(401).send({
+        accessToken: null,
+        message: "Invalid Password",
+      });
+    }
+
+    // generate JWT for user
+    const refreshToken = await generateRefreshToken(user.id);
+
+    const rolesQuery = {
+      text: "SELECT * from user_roles ur JOIN roles r on ur.role_id = r.id WHERE ur.user_id = $1 AND ur.role_id = r.id",
+      values: [user.id],
+    };
+
+    const rolesResult = await db.query(rolesQuery);
+    const roles = rolesResult.rows;
+
+    // Prepare the response with user details and tokens
+    const authorities = roles.map(
+      (role) => "ROLE_" + role.name.toUpperCase()
+    );
+
+    res.status(200).send({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      roles: authorities,
+      accessToken: TokenExpiredError,
+      refreshToken: refreshToken,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
