@@ -126,7 +126,12 @@ exports.signin = async (req, res) => {
       });
     }
 
-    // generate JWT for user
+    // generate a new JWT access token for he user
+    const token = jwt.sign({ id: user.id }, config.secret, {
+      expiresIn: config.jwtExpiration,
+    });
+
+    // generate a new refresh token for user
     const refreshToken = await generateRefreshToken(user.id);
 
     const rolesQuery = {
@@ -153,4 +158,4 @@ exports.signin = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-};
+}; // End of Login Route
