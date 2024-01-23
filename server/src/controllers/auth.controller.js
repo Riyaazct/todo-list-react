@@ -159,3 +159,71 @@ exports.signin = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 }; // End of Login Route
+
+// function to handle refreshing the access token using a refresh token
+exports.refreshToken = async (req, res) => {
+  // extract refresh token from the request
+  const { refreshToken: requestToken } = req.body;
+
+  // Check if refresh token provided
+  if (requestToken === null) {
+    return res
+      .status(403)
+      .json({ message: "Refresh token is required!" });
+  }
+
+  try {
+    // Find refresh token in the database
+    const query = {
+      text: "SELECT * from refresh_tokens WHERE token = $1",
+      values: [requestToken],
+    };
+
+    const { rows } = await db.query(query);
+
+    if (rows.length === 0) {
+      return res
+        .status(403)
+        .json({ message: "Refresh Token is not in the database!" });
+    }
+
+    const refreshToken = rows[0];
+
+    // verify refresh token's expiration
+    if (verifyRefreshTokenExpiration(refreshToken)) {
+      // if the refresh token has expired, remove it from the database and send an error response
+      const deleteQuery = {
+        text: "DELETE FROM refresh_tokens WHERE id = $1",
+        values: [refreshToken.id],
+      };
+      await db.query(deleteQuery);
+
+      return res.status(403).json({
+        message:
+          "Refresh token is expired. Please make a new sign in request.",
+      });
+    }
+
+    // get the associated user for the refresh token
+    const userQuery = {
+      text: "SELECT * FROM users WHERE id = $1",
+      values: [refreshToken.user_id],
+    };
+
+    const userResult = await db.query(userQuery);
+    const user = userResult.rows[0];
+
+    // generate a new access token for the user
+    const newAccessToken = jwt.sign({ id: user.id }, config.secret, {
+      expiresIn: config.jwtExpiration,
+    });
+
+    // send the new access token and the original refresh token in the response
+    return res.status(200).json({
+      accessToken: newAccessToken,
+      refreshToken: refreshToken.token,
+    });
+  } catch (err) {
+    return res.status(500).send({ message: err.message });
+  }
+}; // ENd of function to handle refreshing the access token
