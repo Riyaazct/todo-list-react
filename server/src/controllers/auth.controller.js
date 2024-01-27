@@ -226,4 +226,15 @@ exports.refreshToken = async (req, res) => {
   } catch (err) {
     return res.status(500).send({ message: err.message });
   }
-}; // ENd of function to handle refreshing the access token
+}; // End of function to handle refreshing the access token
+
+exports.signout = async (req, res) => {
+  try {
+    req, (session = null);
+    return res.status(200).send({
+      message: "You've been signed out!",
+    });
+  } catch (err) {
+    this.next(err);
+  }
+};
