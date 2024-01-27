@@ -80,3 +80,51 @@ const isAdmin = async (req, res, next) => {
       .send({ message: "Unable to validate user role!" });
   }
 };
+
+// Check if the user has a moderator role
+
+const isModerator = async (req, res, next) => {
+  try {
+    const query = {
+      text: "SELECT * FROM users WHERE id = $1",
+      values: [req.userId],
+    };
+    const userResult = await db.query(query);
+
+    if (userResult.rowCount.length === 0) {
+      return res.status(403).send({ message: "User not found." });
+    }
+    const user = userResult.rows[0];
+
+    const rolesQuery = {
+      text: "SELECT * FROM user_roles ur JOIN roles r on ur.role_id = r.id WHERE ur.user_id = $1 AND ur.role_id = r.id",
+      values: [user.id],
+    };
+
+    const rolesResult = await db.query(rolesQuery);
+    const roles = rolesResult.rows;
+
+    let isModerator = false;
+
+    //Check if the user has the moderator role
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === moderator) {
+        isModerator = true;
+        break;
+      }
+    }
+
+    if (isModerator) {
+      return next();
+    }
+
+    // if not a moderator send a response indicating the failure
+    return res
+      .status(403)
+      .send({ message: "Require moderator role!" });
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ message: "Unable to validate moderator role." });
+  }
+}; // end of isModerator function
