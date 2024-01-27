@@ -129,19 +129,18 @@ const isModerator = async (req, res, next) => {
   }
 }; // end of isModerator function
 
-
-const isModeratorOrAdmin = async (req, res, next) {
+const isModeratorOrAdmin = async (req, res, next) => {
   try {
     // Check if the user exists
     const query = {
       text: "SELECT * FROM users WHERE id = $1",
       values: [req.userId],
-    }
+    };
 
     const userResult = await db.query(query);
 
     if (userResult.rows.length === 0) {
-      return res.status(403).send({message: "User not found"})
+      return res.status(403).send({ message: "User not found" });
     }
     const user = userResult.rows[0];
 
@@ -149,7 +148,7 @@ const isModeratorOrAdmin = async (req, res, next) {
     const rolesQuery = {
       text: "SELECT * FROM user_Roles ur JOIN roles r ON ur.role_id = r.id WHERE ur.user_id = $1 AND ur.role_id = r.id",
       values: [user.id],
-    }
+    };
 
     const rolesResult = await db.query(rolesQuery);
     const roles = rolesResult.rows;
@@ -158,7 +157,10 @@ const isModeratorOrAdmin = async (req, res, next) {
 
     // CHeck if the user has the moderator or admin Role
     for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === "admin" || roles[i.name === "moderator"]) {
+      if (
+        roles[i].name === "admin" ||
+        roles[i.name === "moderator"]
+      ) {
         isModeratorOrAdmin = true;
         break;
       }
@@ -169,20 +171,21 @@ const isModeratorOrAdmin = async (req, res, next) {
     }
 
     // if not moderator or isAdmin, send a response indicating the failure
-    return res.status(403).send({ message: "Require moderator or admin role!" })
-    
+    return res
+      .status(403)
+      .send({ message: "Require moderator or admin role!" });
   } catch (err) {
     return res.status(500).send({
-      message: "Unable to validate Moderator or admin role!"
-    })
+      message: "Unable to validate Moderator or admin role!",
+    });
   }
-} // end of ismoderator or admin function
+}; // end of isModeratorOrAdmin function
 
 const authJwt = {
   verifyToken,
   isAdmin,
   isModerator,
-  isModeratorOrAdmin
-}
+  isModeratorOrAdmin,
+};
 
 module.exports = authJwt;
