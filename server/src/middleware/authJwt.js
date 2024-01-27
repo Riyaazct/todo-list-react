@@ -108,7 +108,7 @@ const isModerator = async (req, res, next) => {
 
     //Check if the user has the moderator role
     for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === moderator) {
+      if (roles[i].name === "moderator") {
         isModerator = true;
         break;
       }
@@ -128,3 +128,61 @@ const isModerator = async (req, res, next) => {
       .send({ message: "Unable to validate moderator role." });
   }
 }; // end of isModerator function
+
+
+const isModeratorOrAdmin = async (req, res, next) {
+  try {
+    // Check if the user exists
+    const query = {
+      text: "SELECT * FROM users WHERE id = $1",
+      values: [req.userId],
+    }
+
+    const userResult = await db.query(query);
+
+    if (userResult.rows.length === 0) {
+      return res.status(403).send({message: "User not found"})
+    }
+    const user = userResult.rows[0];
+
+    // Check roles
+    const rolesQuery = {
+      text: "SELECT * FROM user_Roles ur JOIN roles r ON ur.role_id = r.id WHERE ur.user_id = $1 AND ur.role_id = r.id",
+      values: [user.id],
+    }
+
+    const rolesResult = await db.query(rolesQuery);
+    const roles = rolesResult.rows;
+
+    let isModeratorOrAdmin = false;
+
+    // CHeck if the user has the moderator or admin Role
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === "admin" || roles[i.name === "moderator"]) {
+        isModeratorOrAdmin = true;
+        break;
+      }
+    }
+
+    if (isModeratorOrAdmin) {
+      return next();
+    }
+
+    // if not moderator or isAdmin, send a response indicating the failure
+    return res.status(403).send({ message: "Require moderator or admin role!" })
+    
+  } catch (err) {
+    return res.status(500).send({
+      message: "Unable to validate Moderator or admin role!"
+    })
+  }
+} // end of ismoderator or admin function
+
+const authJwt = {
+  verifyToken,
+  isAdmin,
+  isModerator,
+  isModeratorOrAdmin
+}
+
+module.exports = authJwt;
