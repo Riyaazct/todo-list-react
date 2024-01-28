@@ -12,10 +12,10 @@ router.use((req, res, next) => {
 
 router.route("/signup").post(controller.signup);
 
-router.route("signin").post(controller.signin);
+router.route("/signin").post(controller.signin);
 
 router.route("/signout").post(controller.signout);
 
-router.route("refreshtoken").post(controller.refreshToken);
+router.route("/refreshtoken").post(controller.refreshToken);
 
 module.exports = router;

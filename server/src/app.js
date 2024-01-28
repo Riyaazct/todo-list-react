@@ -9,8 +9,9 @@ const app = express();
 
 // Require Routes
 const index = require("./routes/index");
-const tasksRoute = require("./routes/tasks");
-const authRoute = require("./routes/");
+// const tasksRoute = require("./routes/tasks");
+const authRoute = require("./routes/auth.routes");
+const userRoute = require("./routes/user.routes");
 
 app.use(express.json());
 
@@ -31,6 +32,10 @@ app.use(
   })
 );
 
+// Require Routes
 app.use("/api", index);
-app.use("/api/tasks", tasksRoute);
+// app.use("/api/tasks", tasksRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/test", userRoute);
+
+module.exports = app;

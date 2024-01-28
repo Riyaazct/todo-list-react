@@ -49,7 +49,9 @@ exports.signup = async (req, res) => {
         if (roles && roles.length > 0) {
           const rolesIdsQuery =
             "SELECT id FROM roles WHERE name = ANY($1)";
-          const roleIdsResult = await db.query(roleIdsQuery, [roles]);
+          const roleIdsResult = await db.query(rolesIdsQuery, [
+            roles,
+          ]);
 
           const roleIds = roleIdsResult.rows.map((row) => row.id);
 
@@ -152,7 +154,7 @@ exports.signin = async (req, res) => {
       name: user.name,
       email: user.email,
       roles: authorities,
-      accessToken: TokenExpiredError,
+      accessToken: token,
       refreshToken: refreshToken,
     });
   } catch (err) {
