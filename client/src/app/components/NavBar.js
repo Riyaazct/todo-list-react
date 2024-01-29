@@ -14,17 +14,11 @@ const NavBar = () => {
   };
 
   return (
-    <div className="justify-around w-screen bg-gray-200 border-b-2 border-gray-300 md:flex">
-      <div className="flex justify-between">
-        <h1 className="p-3 text-2xl font-bold text-blue-600 md:mt-2 lg:text-3xl ">
+    <div className="flex items-center justify-around w-screen p-4 bg-gray-200 border-b-2 border-gray-300 sm:flex-row">
+      <div className="flex flex-col items-center w-full ">
+        <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
           My Todo App
         </h1>
-
-        {/* login and register buttons */}
-        <div className="flex gap-1 p-2">
-          {!isLoggedIn && <Login />}
-          {!isLoggedIn && <Signup />}
-        </div>
 
         {isLoggedIn && (
           <BiMenuAltRight
@@ -48,25 +42,33 @@ const NavBar = () => {
             size={40}
           />
         )}
+
+        <div
+          className={
+            isActive
+              ? " text-center relative "
+              : "hidden md:flex md:p-5 "
+          }
+        >
+          {isLoggedIn && (
+            <ul className="md:flex">
+              <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                Home
+              </li>
+              <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                Categories
+              </li>
+              <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
+                Completed Tasks
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
-      <div
-        className={
-          isActive
-            ? " text-center relative "
-            : "hidden md:flex md:p-5 "
-        }
-      >
-        <ul className="md:flex ">
-          <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-            Home
-          </li>
-          <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-            Categories
-          </li>
-          <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
-            Completed Tasks
-          </li>
-        </ul>
+      {/* login and register buttons */}
+      <div className="flex gap-1">
+        {!isLoggedIn && <Login />}
+        {!isLoggedIn && <Signup />}
       </div>
     </div>
   );
