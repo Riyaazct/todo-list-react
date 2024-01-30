@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
@@ -16,9 +17,11 @@ const NavBar = () => {
   return (
     <div className="flex items-center w-screen p-4 bg-gray-200 border-b-2 border-gray-300 sm:flex-row">
       <div className="flex flex-col items-center justify-around w-full md:flex-row">
-        <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
-          My Todo App
-        </h1>
+        <Link to="/">
+          <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
+            My Todo App
+          </h1>
+        </Link>
 
         {isLoggedIn && (
           <BiMenuAltRight

@@ -51,7 +51,7 @@ const LoginScreen = () => {
   });
 
   return (
-    <div className="flex justify-center h-screen mt-36 ">
+    <div className="flex justify-center mt-36">
       <div className="flex flex-col justify-center p-2 text-center bg-gray-400 border-2 border-gray-700 h-60">
         <h2 className="mb-4 text-2xl font-bold text-blue-700 ">
           SIGN IN

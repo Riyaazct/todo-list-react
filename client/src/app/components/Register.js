@@ -45,9 +45,11 @@ const Register = () => {
   });
 
   return (
-    <div className="flex justify-center text-center">
-      <div className="p-2 border-2 mt-60 h-[300px] flex flex-col justify-center bg-gray-400 border-gray-700">
-        <h2 className="text-2xl text-blue-700">Registration</h2>
+    <div className="flex justify-center mt-36">
+      <div className="p-2 border-2 h-[300px] flex flex-col justify-center bg-gray-400 border-gray-700 text-center">
+        <h2 className="text-2xl font-bold text-blue-700">
+          Registration
+        </h2>
 
         <form onSubmit={formik.handleSubmit}>
           {!successful && (
