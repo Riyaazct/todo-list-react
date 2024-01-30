@@ -45,16 +45,17 @@ const Register = () => {
   });
 
   return (
-    <div>
-      <div>
-        <h2>Register an account</h2>
+    <div className="flex justify-center text-center">
+      <div className="p-2 border-2 mt-60 h-[300px] flex flex-col justify-center bg-gray-400 border-gray-700">
+        <h2 className="text-2xl text-blue-700">Registration</h2>
 
         <form onSubmit={formik.handleSubmit}>
           {!successful && (
-            <div>
-              <div>
+            <div className="p-3 text-center">
+              <div className="p-1 w-max">
                 <label htmlFor="name">Name</label>
                 <input
+                  className="ml-8"
                   type="text"
                   name="name"
                   id="name"
@@ -63,14 +64,15 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.name && formik.errors.name && (
-                  <div>{formik.errors.name}</div>
+                  <div className="ml-4">{formik.errors.name}</div>
                 )}
               </div>
 
               {/* email input */}
-              <div>
+              <div className="p-1">
                 <label htmlFor="email">Email</label>
                 <input
+                  className="ml-9"
                   type="text"
                   id="email"
                   name="email"
@@ -79,14 +81,15 @@ const Register = () => {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.email && formik.errors.email && (
-                  <div>{formik.errors.email}</div>
+                  <div className="ml-2">{formik.errors.email}</div>
                 )}
               </div>
 
               {/* Password Input */}
-              <div>
+              <div className="p-1">
                 <label htmlFor="password">Password</label>
                 <input
+                  className="ml-2"
                   type="password"
                   id="password"
                   name="password"
@@ -96,13 +99,19 @@ const Register = () => {
                 />
                 {formik.touched.password &&
                   formik.errors.password && (
-                    <div>{formik.errors.password}</div>
+                    <div className="ml-9">
+                      {formik.errors.password}
+                    </div>
                   )}
               </div>
 
               {/* Submit Button */}
               <div>
-                <button type="submit" disabled={formik.isSubmitting}>
+                <button
+                  className="p-1 mt-2"
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                >
                   Sign Up
                 </button>
               </div>
