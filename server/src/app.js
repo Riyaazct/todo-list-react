@@ -7,6 +7,8 @@ dotenv.config();
 
 const app = express();
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 // Require Routes
 const index = require("./routes/index");
 // const tasksRoute = require("./routes/tasks");
@@ -17,7 +19,9 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: isDevelopment
+      ? ["http://localhost:3000"]
+      : ["https://fullstack-todo-list-react.netlify.app/"],
     credentials: true,
   })
 );
