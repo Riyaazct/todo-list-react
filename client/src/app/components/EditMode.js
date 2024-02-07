@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 
@@ -33,7 +34,7 @@ const EditMode = ({
   };
 
   return (
-    <div className="flex items-center gap-1 w-full">
+    <div className="flex items-center w-full gap-1">
       <input
         className="bg-gray-200 focus:outline-none"
         type="text"

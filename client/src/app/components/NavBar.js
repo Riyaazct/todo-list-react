@@ -8,6 +8,7 @@ import Signup from "../buttons/Signup";
 
 const NavBar = () => {
   const [isActive, setIsActive] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleClick = () => {
