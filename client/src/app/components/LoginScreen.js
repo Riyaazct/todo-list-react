@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -52,17 +52,18 @@ const LoginScreen = () => {
 
   return (
     <div className="flex justify-center mt-36">
-      <div className="flex flex-col justify-center p-2 text-center bg-gray-400 border-2 border-gray-700 h-60">
-        <h2 className="mb-4 text-2xl font-bold text-blue-700 ">
-          SIGN IN
-        </h2>
+      <div className="flex flex-col justify-center text-center bg-gray-400 rounded-xl h-96 w-96">
+        <h2 className="text-2xl font-bold text-black">Login</h2>
 
-        <form onSubmit={formik.handleSubmit} className="p-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-full p-8 pb-5 "
+        >
           {/* EMAIL INPUT */}
-          <div className="p-1">
-            <label htmlFor="email">Email</label>
+          <div>
             <input
-              className="rounded-sm ml-9"
+              className="w-full p-2 mb-3 rounded-md placeholder:font-medium"
+              placeholder="Email"
               type="text"
               id="email"
               name="email"
@@ -75,10 +76,10 @@ const LoginScreen = () => {
           </div>
 
           {/* PASSWORD INPUT */}
-          <div className="p-1">
-            <label htmlFor="password">Password</label>
+          <div>
             <input
-              className="ml-2 rounded-sm"
+              placeholder="Password"
+              className="w-full p-2 mt-3 mb-2 rounded-md placeholder:font-medium"
               type="password"
               id="password"
               name="password"
@@ -91,8 +92,12 @@ const LoginScreen = () => {
           </div>
 
           {/* SUBMIT BUTTON */}
-          <div className="mx-auto mt-3 w-max">
-            <button className="p-0" type="submit" disabled={loading}>
+          <div className="mt-3">
+            <button
+              className="p-1 text-white rounded-md bg-[#17a2b8] border-0 w-full"
+              type="submit"
+              disabled={loading}
+            >
               {loading && <span></span>}
               <span>Login</span>
             </button>
@@ -105,6 +110,12 @@ const LoginScreen = () => {
             </div>
           )}
         </form>
+        <p>
+          Don't have an account?{" "}
+          <span className="text-blue-600">
+            <Link>Sign Up</Link>
+          </span>
+        </p>
       </div>
     </div>
   );
