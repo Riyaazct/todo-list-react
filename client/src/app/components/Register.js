@@ -46,10 +46,12 @@ const Register = () => {
 
   return (
     <div className="mt-36">
-      <div className="w-full max-w-[400px] text-center bg-gray-400 rounded-xl m-auto p-5">
-        <h2 className="text-2xl font-bold text-black">Sign Up</h2>
+      <div className="p-5 m-auto text-center bg-gray-400 h-96 w-96 rounded-xl">
+        <h2 className="mt-8 text-2xl font-bold text-black ">
+          Sign Up
+        </h2>
 
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="w-full pb-5">
           {!successful && (
             <div className="p-3 text-center">
               <div className="p-1">
