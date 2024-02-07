@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: isDevelopment
-      ? ["http://localhost:3000"]
-      : ["https://fullstack-todo-list-react.netlify.app/"],
+      ? "http://localhost:3000"
+      : "https://fullstack-todo-list-react.netlify.app/",
     credentials: true,
   })
 );
