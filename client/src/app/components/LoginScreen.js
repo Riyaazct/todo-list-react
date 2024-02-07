@@ -94,7 +94,7 @@ const LoginScreen = () => {
           {/* SUBMIT BUTTON */}
           <div className="mt-3">
             <button
-              className="p-1 text-white rounded-md bg-[#17a2b8] border-0 w-full"
+              className="p-1 text-white rounded-md bg-[#007bff] border-0 w-full"
               type="submit"
               disabled={loading}
             >
