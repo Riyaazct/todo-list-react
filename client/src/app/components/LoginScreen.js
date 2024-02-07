@@ -113,7 +113,7 @@ const LoginScreen = () => {
         <p>
           Don't have an account?{" "}
           <span className="text-blue-600">
-            <Link>Sign Up</Link>
+            <Link to="/register">Sign Up</Link>
           </span>
         </p>
       </div>

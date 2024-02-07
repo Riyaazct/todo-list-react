@@ -45,19 +45,17 @@ const Register = () => {
   });
 
   return (
-    <div className="flex justify-center mt-36">
-      <div className="p-2 border-2 h-[300px] flex flex-col justify-center bg-gray-400 border-gray-700 text-center">
-        <h2 className="text-2xl font-bold text-blue-700">
-          Registration
-        </h2>
+    <div className="mt-36">
+      <div className="w-full max-w-[400px] text-center bg-gray-400 rounded-xl m-auto p-2 p-4">
+        <h2 className="text-2xl font-bold text-blue-700">Sign Up</h2>
 
         <form onSubmit={formik.handleSubmit}>
           {!successful && (
             <div className="p-3 text-center">
-              <div className="p-1 w-max">
-                <label htmlFor="name">Name</label>
+              <div className="p-1">
                 <input
-                  className="ml-8"
+                  className="w-full p-2 my-3 font-medium rounded-md placeholder:text-gray-500 placeholder:pl-2"
+                  placeholder="Name"
                   type="text"
                   name="name"
                   id="name"
@@ -72,9 +70,9 @@ const Register = () => {
 
               {/* email input */}
               <div className="p-1">
-                <label htmlFor="email">Email</label>
                 <input
-                  className="ml-9"
+                  className="w-full p-2 my-3 font-medium rounded-md placeholder:text-gray-500 placeholder:pl-2"
+                  placeholder="Email"
                   type="text"
                   id="email"
                   name="email"
@@ -89,9 +87,9 @@ const Register = () => {
 
               {/* Password Input */}
               <div className="p-1">
-                <label htmlFor="password">Password</label>
                 <input
-                  className="ml-2"
+                  className="w-full p-2 my-3 font-medium rounded-md placeholder:text-gray-500 placeholder:pl-2"
+                  placeholder="password"
                   type="password"
                   id="password"
                   name="password"
@@ -110,7 +108,7 @@ const Register = () => {
               {/* Submit Button */}
               <div>
                 <button
-                  className="p-1 mt-2"
+                  className="w-full p-1 mt-3 bg-blue-500 text-gray-50"
                   type="submit"
                   disabled={formik.isSubmitting}
                 >
