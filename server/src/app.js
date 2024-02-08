@@ -21,7 +21,8 @@ app.use(
   cors({
     origin: isDevelopment
       ? "http://localhost:3000"
-      : "https://todo-list-react-two-black.vercel.app",
+      : "https://todo-list-react-two-black.vercel.app" ||
+        "https://fullstack-todo-list-react.netlify.app",
     credentials: true,
   })
 );
