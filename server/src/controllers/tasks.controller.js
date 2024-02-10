@@ -43,10 +43,7 @@ exports.deleteTask = async (req, res) => {
   try {
     const findTaskById = await db.query(findTaskQuery);
 
-    console.log(id, user_id); //*************** */
-
     if (findTaskById.rows.length === 0) {
-      console.log(findTaskById.rows);
       return res.status(409).send({ message: "task does not exist" });
     }
 
