@@ -11,7 +11,7 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 // Require Routes
 const index = require("./routes/index");
-// const tasksRoute = require("./routes/tasks");
+const tasksRoute = require("./routes/tasks.routes");
 const authRoute = require("./routes/auth.routes");
 const userRoute = require("./routes/user.routes");
 
@@ -38,8 +38,8 @@ app.use(
 
 // Require Routes
 app.use("/api", index);
-// app.use("/api/tasks", tasksRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/test", userRoute);
+app.use("/api/tasks", tasksRoute);
 
 module.exports = app;
