@@ -2,12 +2,10 @@ const db = require("../config/database");
 
 exports.allTasks = async (req, res) => {
   const tasksQuery = {
-    text: "SELECT * FROM TASKS",
+    text: "SELECT * FROM tasks",
   };
   try {
     const tasksReturned = await db.query(tasksQuery);
-
-    console.log(tasksReturned);
 
     return res.status(200).send(tasksReturned.rows);
   } catch (error) {

@@ -20,7 +20,7 @@ const Home = () => {
       const response = await axios.get(url);
       setData(response.data);
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   };
   return (
