@@ -9,7 +9,13 @@ exports.allTasks = async (req, res) => {
 
     return res.status(200).send(tasksReturned.rows);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    console.error(error.message);
+    res
+      .status(500)
+      .send({
+        message: "An error occurred, unable to retrieve tasks",
+        error: error.message,
+      });
   }
 };
 
