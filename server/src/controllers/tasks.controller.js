@@ -1,5 +1,20 @@
 const db = require("../config/database");
 
+exports.allTasks = async (req, res) => {
+  const tasksQuery = {
+    text: "SELECT * FROM TASKS",
+  };
+  try {
+    const tasksReturned = await db.query(tasksQuery);
+
+    console.log(tasksReturned);
+
+    return res.status(200).send(tasksReturned.rows);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 exports.addNewTask = async (req, res) => {
   const { task, user_id } = req.body;
 
@@ -82,10 +97,12 @@ exports.updateTask = async (req, res) => {
         .send({ message: "Task does not exist." });
     }
     const updateTaskQuery = {
-      text: "UPDATE tasks SET task = $1 WHERE id = $2 AND user_id = $3",
+      text: "UPDATE tasks SET task = $1 WHERE id = $2 AND user_id = $3 RETURNING *",
       values: [task, id, userId],
     };
     const taskUpdated = await db.query(updateTaskQuery);
+
+    console.log(taskUpdated);
 
     res.status(200).send({ message: "Task successfully updated!" });
   } catch (error) {

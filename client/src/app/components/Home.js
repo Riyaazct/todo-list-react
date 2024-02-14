@@ -10,8 +10,8 @@ const Home = () => {
   // const url = "https://react-todo-list-d87e.onrender.com/api/data";
   const url =
     process.env.NODE_ENV === "production"
-      ? "https://long-ruby-dhole-hat.cyclic.app/api/data"
-      : "http://localhost:3100/api/data";
+      ? "https://long-ruby-dhole-hat.cyclic.app/api/tasks"
+      : "http://localhost:3100/api/tasks";
 
   useEffect(() => {
     getTodos();
