@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 const NewTask = ({ data, setData, url, getTodos }) => {
   const [captured, setCaptured] = useState("");
@@ -7,8 +7,8 @@ const NewTask = ({ data, setData, url, getTodos }) => {
   // HANDLE BUTTON CLICK FUNCTION
 
   const handleSubmit = (e) => {
-    axios
-      .post(url, { task: captured })
+    api
+      .post("/tasks/addnew", { task: captured, user_id: 11 })
       .then((response) => {
         getTodos();
         setCaptured("");
@@ -23,7 +23,7 @@ const NewTask = ({ data, setData, url, getTodos }) => {
       <div className="w-full h-full text-center mt-[50px]">
         <form>
           <input
-            className="w-full h-10 rounded-md p-2 placeholder:italic bg-gray-200 placeholder:text-black font-semibold focus:outline-none "
+            className="w-full h-10 p-2 font-semibold bg-gray-200 rounded-md placeholder:italic placeholder:text-black focus:outline-none "
             type="text"
             id="input"
             placeholder="Add task"
@@ -33,7 +33,7 @@ const NewTask = ({ data, setData, url, getTodos }) => {
           />
         </form>
         <button
-          className="mt-2 w-full hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
+          className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
           type="submit"
           onClick={(e) => handleSubmit(e)}
         >
