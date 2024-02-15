@@ -1,12 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import TokenService from "../services/token.service";
-
-const user = TokenService.getUSer();
 
 const initialState = {
-  userId: null,
   isLoggedIn: false,
-  userDetails: user,
+  userDetails: {},
 };
 
 const usersSlice = createSlice({
@@ -14,8 +10,9 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     loginUser(state, action) {
-      const { userId, userDetails } = action.payload;
-      state.userId = userId;
+      const { userDetails } = action.payload;
+      console.log(userDetails);
+
       state.isLoggedIn = true;
       state.userDetails = userDetails;
     },

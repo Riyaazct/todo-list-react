@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import api from "../services/api";
 
-import TokenService from "../services/token.service";
-
-const user = TokenService.getUSer();
-const userId = user.id;
-
 const NewTask = ({ data, setData, getTodos }) => {
+  const user = useSelector((state) => state.user);
+  const userId = user?.userDetails.id;
+
   const [captured, setCaptured] = useState("");
 
   // HANDLE BUTTON CLICK FUNCTION

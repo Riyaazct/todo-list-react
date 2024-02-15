@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import api from "../services/api";
 import NewTask from "./NewTask";
 import Tasks from "./Tasks";
-import TokenService from "../services/token.service";
-
-const user = TokenService.getUSer();
-const userId = user.id;
-console.log(user);
+// import TokenService from "../services/token.service";
 
 const Home = () => {
+  const userDetails = useSelector((state) => state.user.userDetails);
+  const userId = userDetails?.id;
+
   const [data, setData] = useState([]);
 
   const url =
@@ -18,10 +19,11 @@ const Home = () => {
 
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [userId]);
 
   const getTodos = async () => {
     try {
+      if (!userId) return;
       const response = await api.get(`${url}/${userId}`);
       setData(response.data);
     } catch (error) {
