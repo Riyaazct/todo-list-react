@@ -2,7 +2,6 @@ const db = require("../config/database");
 
 exports.allTasks = async (req, res) => {
   const userId = parseInt(req.params.id);
-  console.log(userId);
 
   const tasksQuery = {
     text: "SELECT * FROM tasks where user_id = $1",
@@ -107,8 +106,6 @@ exports.updateTask = async (req, res) => {
       values: [task, id, userId],
     };
     const taskUpdated = await db.query(updateTaskQuery);
-
-    console.log(taskUpdated);
 
     res.status(200).send({ message: "Task successfully updated!" });
   } catch (error) {

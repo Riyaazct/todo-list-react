@@ -6,6 +6,7 @@ import TokenService from "../services/token.service";
 
 const user = TokenService.getUSer();
 const userId = user.id;
+console.log(user);
 
 const Home = () => {
   const [data, setData] = useState([]);
