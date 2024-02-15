@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import api from "../services/api";
 
-const NewTask = ({ data, setData, url, getTodos }) => {
+import TokenService from "../services/token.service";
+
+const user = TokenService.getUSer();
+const userId = user.id;
+
+const NewTask = ({ data, setData, getTodos }) => {
   const [captured, setCaptured] = useState("");
 
   // HANDLE BUTTON CLICK FUNCTION
 
-  const handleSubmit = (e) => {
-    api
-      .post("/tasks/addnew", { task: captured, user_id: 11 })
-      .then((response) => {
-        getTodos();
-        setCaptured("");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleSubmit = async (e) => {
+    try {
+      if (captured && userId) {
+        return await api
+          .post("/tasks/new", { task: captured, user_id: userId })
+          .then((response) => {
+            getTodos();
+            setCaptured("");
+          })
+          .catch((error) => {
+            console.error(error.message);
+            setCaptured("");
+          });
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (

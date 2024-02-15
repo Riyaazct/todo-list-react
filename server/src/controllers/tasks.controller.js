@@ -1,8 +1,12 @@
 const db = require("../config/database");
 
 exports.allTasks = async (req, res) => {
+  const userId = parseInt(req.params.id);
+  console.log(userId);
+
   const tasksQuery = {
-    text: "SELECT * FROM tasks",
+    text: "SELECT * FROM tasks where user_id = $1",
+    values: [userId],
   };
   try {
     const tasksReturned = await db.query(tasksQuery);
@@ -10,12 +14,10 @@ exports.allTasks = async (req, res) => {
     return res.status(200).send(tasksReturned.rows);
   } catch (error) {
     console.error(error.message);
-    res
-      .status(500)
-      .send({
-        message: "An error occurred, unable to retrieve tasks",
-        error: error.message,
-      });
+    res.status(500).send({
+      message: "An error occurred, unable to retrieve tasks",
+      error: error.message,
+    });
   }
 };
 

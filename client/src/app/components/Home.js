@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../services/api";
 import NewTask from "./NewTask";
 import Tasks from "./Tasks";
+import TokenService from "../services/token.service";
+
+const user = TokenService.getUSer();
+const userId = user.id;
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -17,7 +21,7 @@ const Home = () => {
 
   const getTodos = async () => {
     try {
-      const response = await axios.get(url);
+      const response = await api.get(`${url}/${userId}`);
       setData(response.data);
     } catch (error) {
       console.error(error.message);
@@ -25,12 +29,7 @@ const Home = () => {
   };
   return (
     <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
-      <NewTask
-        data={data}
-        setData={setData}
-        url={url}
-        getTodos={getTodos}
-      />
+      <NewTask data={data} setData={setData} getTodos={getTodos} />
 
       {data.length ? (
         <Tasks
