@@ -1,23 +1,28 @@
 /* eslint-disable no-unused-vars */
-import axios from "axios";
+import api from "../services/api";
+import { useSelector } from "react-redux";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 
 const EditMode = ({
   setEditing,
   currentText,
   setCurrentText,
-  id,
   data,
   setData,
-  url,
 }) => {
+  const userId = data[0].user_id;
+  const id = data[0].id;
+
   //FUNCTION TO HANDLE THE ACCEPTANCE OF EDIT
   const handleSubmitForAcceptingEdit = async (e, id) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`${url}/${id}`, {
-        task: currentText,
-      });
+      const response = await api.put(
+        `/tasks/update/${id}/${userId}`,
+        {
+          task: currentText,
+        }
+      );
       setData(
         data.map((item) =>
           item.id === id ? { ...item, task: currentText } : item

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import api from "../services/api";
 import NewTask from "./NewTask";
 import Tasks from "./Tasks";
-// import TokenService from "../services/token.service";
 
 const Home = () => {
   const userDetails = useSelector((state) => state.user.userDetails);
@@ -19,6 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     getTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const getTodos = async () => {
@@ -34,14 +34,7 @@ const Home = () => {
     <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
       <NewTask data={data} setData={setData} getTodos={getTodos} />
 
-      {data.length ? (
-        <Tasks
-          data={data}
-          setData={setData}
-          url={url}
-          getTodos={getTodos}
-        />
-      ) : null}
+      <Tasks data={data} setData={setData} getTodos={getTodos} />
     </div>
   );
 };
