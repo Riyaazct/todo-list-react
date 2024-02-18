@@ -8,7 +8,6 @@ import Tasks from "./Tasks";
 const Home = () => {
   const userDetails = useSelector((state) => state.user.userDetails);
   const userId = userDetails?.id;
-
   const [data, setData] = useState([]);
 
   const url =

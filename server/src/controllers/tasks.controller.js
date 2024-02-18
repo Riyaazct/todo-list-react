@@ -96,6 +96,8 @@ exports.updateTask = async (req, res) => {
   try {
     const foundTask = await db.query(findTaskToUpdateQuery);
 
+    console.log(foundTask.rows);
+
     if (foundTask.rows.length === 0) {
       return res
         .status(409)
@@ -107,7 +109,10 @@ exports.updateTask = async (req, res) => {
     };
     const taskUpdated = await db.query(updateTaskQuery);
 
-    res.status(200).send({ message: "Task successfully updated!" });
+    res.status(200).send({
+      message: "Task successfully updated!",
+      task: taskUpdated.rows,
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: "An error occurred" });

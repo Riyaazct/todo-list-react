@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import api from "../services/api";
-import { useSelector } from "react-redux";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 
 const EditMode = ({
@@ -8,27 +7,33 @@ const EditMode = ({
   currentText,
   setCurrentText,
   data,
+  id,
+  userId,
   setData,
+  getTodos,
 }) => {
-  const userId = data[0].user_id;
-  const id = data[0].id;
-
   //FUNCTION TO HANDLE THE ACCEPTANCE OF EDIT
-  const handleSubmitForAcceptingEdit = async (e, id) => {
-    e.preventDefault();
+
+  const handleSubmitForAcceptingEdit = async (e) => {
+    // e.preventDefault();
     try {
-      const response = await api.put(
-        `/tasks/update/${id}/${userId}`,
-        {
-          task: currentText,
-        }
+      const foundTask = data.find(
+        (task) => task.id === id && task.user_id === userId
       );
-      setData(
-        data.map((item) =>
-          item.id === id ? { ...item, task: currentText } : item
-        )
-      );
-      setEditing(false);
+
+      console.log(foundTask);
+
+      if (foundTask) {
+        const response = await api.put(
+          `/tasks/update/${id}/${userId}`,
+          {
+            task: currentText,
+          }
+        );
+        setEditing(false);
+        getTodos();
+        return response.data;
+      }
     } catch (err) {
       console.error(err.message);
     }

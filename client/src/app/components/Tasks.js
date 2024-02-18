@@ -29,7 +29,10 @@ const Tasks = ({ data, setData, getTodos }) => {
                 setEditing={setEditing}
                 currentText={currentText}
                 setCurrentText={setCurrentText}
+                id={id}
+                userId={userId}
                 data={data}
+                getTodos={getTodos}
                 setData={setData}
               />
             ) : (
@@ -44,6 +47,7 @@ const Tasks = ({ data, setData, getTodos }) => {
               />
               <Edit
                 id={id}
+                userId={userId}
                 setEditing={setEditing}
                 setIdForEditing={setIdForEditing}
                 setCurrentText={setCurrentText}
