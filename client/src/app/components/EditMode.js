@@ -21,8 +21,6 @@ const EditMode = ({
         (task) => task.id === id && task.user_id === userId
       );
 
-      console.log(foundTask);
-
       if (foundTask) {
         const response = await api.put(
           `/tasks/update/${id}/${userId}`,
