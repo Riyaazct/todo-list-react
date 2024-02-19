@@ -1,13 +1,16 @@
-import axios from "axios";
+import { useSelector } from "react-redux";
+import api from "../services/api";
 import React from "react";
 import { AiOutlineClear } from "react-icons/ai";
 
-const ClearList = ({ getTodos, url, setData }) => {
+const ClearList = ({ getTodos }) => {
+  const userId = useSelector((state) => state.user.userDetails.id);
+
   //HANDLE DELETE ALL FUNCTION
   const handleDeleteAll = async () => {
     try {
-      await axios.delete(`${url}`);
-      setData([]);
+      await api.delete(`/tasks/clear/${userId}`);
+      getTodos();
     } catch (err) {
       console.error(err.message);
     }

@@ -60,7 +60,7 @@ const Tasks = ({ data, setData, getTodos }) => {
       </div>
       {/* IF TASKS EXIST, SHOW BUTTON, ELSE DON'T */}
       {data.length !== 0 && (
-        <ClearList getTodos={getTodos} setData={setData} />
+        <ClearList getTodos={getTodos} userId={data.userId} />
       )}
     </div>
   );
