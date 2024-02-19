@@ -2,11 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import TokenService from "../services/token.service";
 
-const { email, id, name, roles } = TokenService.getUSer();
-
+const user = TokenService.getUSer();
 const initialState = {
   isLoggedIn: false,
-  userDetails: { id, name, email, roles },
+  userDetails: { user },
 };
 
 const usersSlice = createSlice({

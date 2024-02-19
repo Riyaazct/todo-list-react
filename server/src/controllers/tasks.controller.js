@@ -84,6 +84,29 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
+exports.deleteAllTasks = async (req, res) => {
+  const id = req.params.id;
+  const userId = req.params.user_id;
+
+  try {
+    const deleteQuery = {
+      text: "DELETE FROM tasks WHERE user_id = $1",
+      values: [userId],
+    };
+
+    const deletedTasks = await db.query(deleteQuery);
+
+    return res
+      .status(200)
+      .send({ message: "Tasks successfully deleted" });
+  } catch (err) {
+    return res.status(500).send({
+      message: "An error occurred, operation not completed",
+      error: err.message,
+    });
+  }
+};
+
 exports.updateTask = async (req, res) => {
   const id = parseInt(req.params.id);
   const userId = parseInt(req.params.user_id);

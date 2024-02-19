@@ -5,7 +5,7 @@ import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
 
 const Tasks = ({ data, setData, getTodos }) => {
-  // set editmode
+  // set edit mode
   const [editing, setEditing] = useState(false);
   //id for identifying which line to render the input for editing
   const [idForEditing, setIdForEditing] = useState(null);
@@ -59,9 +59,9 @@ const Tasks = ({ data, setData, getTodos }) => {
         ))}
       </div>
       {/* IF TASKS EXIST, SHOW BUTTON, ELSE DON'T */}
-      {data.length ? (
+      {data.length !== 0 && (
         <ClearList getTodos={getTodos} setData={setData} />
-      ) : null}
+      )}
     </div>
   );
 };
