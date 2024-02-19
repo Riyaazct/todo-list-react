@@ -84,7 +84,7 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
-exports.deleteAllTasks = async (req, res) => {
+exports.clearTasks = async (req, res) => {
   const id = req.params.id;
   const userId = req.params.user_id;
 
