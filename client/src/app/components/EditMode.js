@@ -9,7 +9,6 @@ const EditMode = ({
   data,
   id,
   userId,
-  setData,
   getTodos,
 }) => {
   //FUNCTION TO HANDLE THE ACCEPTANCE OF EDIT
@@ -17,7 +16,7 @@ const EditMode = ({
   const handleSubmitForAcceptingEdit = async (e) => {
     // e.preventDefault();
     try {
-      const foundTask = data.find(
+      const foundTask = data.some(
         (task) => task.id === id && task.user_id === userId
       );
 

@@ -1,19 +1,23 @@
-import axios from "axios";
+import api from "../services/api";
 import React from "react";
 import { FiDelete } from "react-icons/fi";
 
-const Delete = ({ data, setData, url, id, getTodos }) => {
-  const handleDelete = async (id) => {
+const Delete = ({ data, setData, url, id, userId, getTodos }) => {
+  const handleDelete = async () => {
     try {
-      await axios.delete(`${url}/${id}`);
+      const response = await api.delete(
+        `/tasks/delete/${id}/${userId}`
+      );
+      console.log(response.data);
       getTodos();
-      // setData(data.filter((item) => item.id !== id));
+
+      return response.data;
     } catch (error) {
       console.error(error.message);
     }
   };
 
-  return <FiDelete size={20} onClick={() => handleDelete(id)} />;
+  return <FiDelete size={20} onClick={handleDelete} />;
 };
 
 export default Delete;

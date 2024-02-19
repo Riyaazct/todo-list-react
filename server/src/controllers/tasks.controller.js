@@ -74,8 +74,9 @@ exports.deleteTask = async (req, res) => {
 
     const taskDeleted = await db.query(deleteTaskQuery);
 
-    res.status(500).send({
+    return res.status(200).send({
       message: `Task with id ${id} successfully deleted`,
+      task: taskDeleted.rows[0],
     });
   } catch (error) {
     console.error(error.message);
@@ -95,8 +96,6 @@ exports.updateTask = async (req, res) => {
 
   try {
     const foundTask = await db.query(findTaskToUpdateQuery);
-
-    console.log(foundTask.rows);
 
     if (foundTask.rows.length === 0) {
       return res

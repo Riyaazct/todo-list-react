@@ -43,6 +43,7 @@ const Tasks = ({ data, setData, getTodos }) => {
                 data={data}
                 setData={setData}
                 id={id}
+                userId={userId}
                 getTodos={getTodos}
               />
               <Edit
