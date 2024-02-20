@@ -11,6 +11,7 @@ const NewTask = ({ data, setData, getTodos }) => {
   // HANDLE BUTTON CLICK FUNCTION
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       if (captured && userId) {
         return await api
@@ -32,7 +33,7 @@ const NewTask = ({ data, setData, getTodos }) => {
   return (
     <div>
       <div className="w-full h-full text-center mt-[50px]">
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <input
             className="w-full h-10 p-2 font-semibold bg-gray-200 rounded-md placeholder:italic placeholder:text-black focus:outline-none "
             type="text"
@@ -41,12 +42,12 @@ const NewTask = ({ data, setData, getTodos }) => {
             value={captured}
             // ONCHANGE CHANGE EVENT
             onChange={(e) => setCaptured(e.target.value)}
+            autoFocus
           />
         </form>
         <button
           className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
           type="submit"
-          onClick={(e) => handleSubmit(e)}
         >
           Add Task
         </button>
