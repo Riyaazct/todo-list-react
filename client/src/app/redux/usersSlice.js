@@ -5,7 +5,7 @@ import TokenService from "../services/token.service";
 const user = TokenService.getUSer();
 const initialState = {
   isLoggedIn: false,
-  userDetails: { user },
+  userDetails: user,
 };
 
 const usersSlice = createSlice({
