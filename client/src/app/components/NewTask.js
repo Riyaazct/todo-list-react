@@ -1,41 +1,53 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import api from "../services/api";
 
-const NewTask = ({ data, setData, url, getTodos }) => {
+const NewTask = ({ data, setData, getTodos }) => {
+  const user = useSelector((state) => state.user);
+  const userId = user?.userDetails.id;
+
   const [captured, setCaptured] = useState("");
 
   // HANDLE BUTTON CLICK FUNCTION
 
-  const handleSubmit = (e) => {
-    axios
-      .post(url, { task: captured })
-      .then((response) => {
-        getTodos();
-        setCaptured("");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (captured && userId) {
+        return await api
+          .post("/tasks/new", { task: captured, user_id: userId })
+          .then((response) => {
+            getTodos();
+            setCaptured("");
+          })
+          .catch((error) => {
+            console.error(error.message);
+            setCaptured("");
+          });
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
     <div>
       <div className="w-full h-full text-center mt-[50px]">
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <input
-            className="w-full h-10 rounded-md p-2 placeholder:italic bg-gray-200 placeholder:text-black font-semibold focus:outline-none "
+            className="w-full h-10 p-2 font-semibold bg-gray-200 rounded-md placeholder:italic placeholder:text-black focus:outline-none "
             type="text"
             id="input"
             placeholder="Add task"
             value={captured}
             // ONCHANGE CHANGE EVENT
             onChange={(e) => setCaptured(e.target.value)}
+            autoFocus
           />
         </form>
         <button
-          className="mt-2 w-full hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
+          className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
           type="submit"
-          onClick={(e) => handleSubmit(e)}
         >
           Add Task
         </button>

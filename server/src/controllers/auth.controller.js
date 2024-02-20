@@ -15,31 +15,33 @@ const {
 } = require("../middleware/checkIfRolesExists");
 
 exports.signup = async (req, res) => {
-  const { email, password, roles } = req.body;
+  const { name, email, password, roles } = req.body;
 
   try {
-    //check if the user exists
+    // Check if the user already exists
     const existingUserQuery = "SELECT * FROM users WHERE email = $1";
     const existingUser = await db.query(existingUserQuery, [email]);
 
     if (existingUser.rows.length > 0) {
-      res.status(400).send({
-        message: "User with this email already exists.",
+      return res.status(400).send({
+        message: "User with this name or email already exists.",
       });
     }
 
-    //   Check user roles
+    // Role checking
     await checkIfRolesExist(req, res, async () => {
       try {
+        // Hash the password
         const hashedPassword = await bcrypt.hash(
           password,
           saltRounds
         );
 
-        //   Create a new user in database
+        // Creating a new user record in the database
         const createUserQuery =
-          "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id";
+          "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id";
         const newUser = await db.query(createUserQuery, [
+          name,
           email,
           hashedPassword,
         ]);
@@ -47,16 +49,14 @@ exports.signup = async (req, res) => {
         let defaultRoleId = 1;
 
         if (roles && roles.length > 0) {
-          const rolesIdsQuery =
+          const roleIdsQuery =
             "SELECT id FROM roles WHERE name = ANY($1)";
-          const roleIdsResult = await db.query(rolesIdsQuery, [
-            roles,
-          ]);
+          const roleIdsResult = await db.query(roleIdsQuery, [roles]);
 
           const roleIds = roleIdsResult.rows.map((row) => row.id);
 
           const assignRolesQuery =
-            "INSERT INTO user_roles (user_id, role_id) VALUES ($1,$2)";
+            "INSERT INTO user_roles (user_id, role_id) VALUES ($1, $2)";
 
           for (const roleId of roleIds) {
             await db.query(assignRolesQuery, [
@@ -65,17 +65,16 @@ exports.signup = async (req, res) => {
             ]);
           }
         } else {
-          // assign default role
+          // Assign default role
           const assignDefaultRoleQuery =
-            "INSERT INTO user_roles (user_id, role_id) VALUES ($1,$2)";
-
+            "INSERT INTO user_roles (user_id, role_id) VALUES ($1, $2)";
           await db.query(assignDefaultRoleQuery, [
             newUser.rows[0].id,
             defaultRoleId,
           ]);
         }
 
-        res.send({ message: "User Registered Successfully" });
+        res.send({ message: "User registered successfully!" });
       } catch (error) {
         console.error("Error during registration", error);
         res.status(500).send({
@@ -84,11 +83,11 @@ exports.signup = async (req, res) => {
         });
       }
     });
-  } catch (err) {
-    console.error("An error occurred during registration", err);
+  } catch (error) {
+    console.error("Error during registration", error);
     res.status(500).send({
       message: "An error occurred while registering the user",
-      error: err.message,
+      error: error.message,
     });
   }
 };

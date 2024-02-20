@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
+import { loginUser } from "../redux/usersSlice";
 
 const LoginScreen = () => {
   const [loading, setLoading] = useState("");
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -27,26 +30,38 @@ const LoginScreen = () => {
       password: "",
     },
     validationSchema,
-    onSubmit: (data) => {
-      const { email, password } = data;
+    onSubmit: async (data) => {
       setMessage("");
       setLoading(true);
 
-      AuthService.login(email, password)
-        .then(() => {
-          navigate("/profile");
-          window.location.reload();
-        })
-        .catch((error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setLoading(false);
-          setMessage(resMessage);
-        });
+      try {
+        const response = await AuthService.login(
+          data.email,
+          data.password
+        );
+
+        const { id, name, email } = response;
+
+        const userDetails = { id, name, email };
+
+        dispatch(
+          loginUser({
+            userDetails,
+          })
+        );
+
+        navigate("/");
+        document.window.reload();
+      } catch (error) {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setLoading(false);
+        setMessage(resMessage);
+      }
     },
   });
 
