@@ -1,18 +1,15 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
-import { loginUser } from "../redux/usersSlice";
 
 const LoginScreen = () => {
   const [loading, setLoading] = useState("");
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -30,27 +27,15 @@ const LoginScreen = () => {
       password: "",
     },
     validationSchema,
-    onSubmit: async (data) => {
+    onSubmit: async ({ email, password }) => {
       setMessage("");
       setLoading(true);
 
       try {
-        const response = await AuthService.login(
-          data.email,
-          data.password
-        );
-
-        const { id, name, email } = response;
-
-        const userDetails = { id, name, email };
-
-        dispatch(
-          loginUser({
-            userDetails,
-          })
-        );
+        await AuthService.login(email, password);
 
         navigate("/");
+
         document.window.reload();
       } catch (error) {
         const resMessage =
