@@ -3,35 +3,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import TokenService from "../services/token.service";
 
 const user = TokenService.getUSer();
+
+const { id, name, email } = user;
+
 const initialState = {
   isLoggedIn: false,
-  userDetails: "",
+  userDetails: { id, name, user },
 };
 
 const usersSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginUser(state, action) {
-      const { userDetails } = action.payload;
-
-      state.isLoggedIn = true;
-      state.userDetails = userDetails;
-    },
-    logoutUser(state) {
-      state.userId = null;
-      state.isLoggedIn = false;
-      state.userDetails = null;
-    },
-    updateUserDetails(state, action) {
-      const { userDetails } = action.payload;
-      state.userDetails = userDetails;
-    },
+    // Code
   },
 });
-
-export const { loginUser, logoutUser, updateUserDetails } =
-  usersSlice.actions;
 
 export const selectUserId = (state) => state.user.userId;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
