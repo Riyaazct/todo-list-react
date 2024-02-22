@@ -8,12 +8,8 @@ import Tasks from "./Tasks";
 const Home = () => {
   const userDetails = useSelector((state) => state.user.userDetails);
   const userId = userDetails?.id;
-  const [data, setData] = useState([]);
 
-  const url =
-    process.env.NODE_ENV === "production"
-      ? "https://long-ruby-dhole-hat.cyclic.app/api/tasks"
-      : "http://localhost:3100/api/tasks";
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getTodos();
@@ -23,7 +19,7 @@ const Home = () => {
   const getTodos = async () => {
     try {
       if (!userId) return;
-      const response = await api.get(`${url}/${userId}`);
+      const response = await api.get(`/tasks/${userId}`);
       setData(response.data);
     } catch (error) {
       console.error(error.message);
