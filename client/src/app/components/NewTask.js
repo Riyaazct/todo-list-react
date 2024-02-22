@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import api from "../services/api";
 
 const NewTask = ({ data, setData, getTodos }) => {
-  const user = useSelector((state) => state.user);
-  const userId = user?.userDetails.id;
+  const user = useSelector((state) => state.user.userDetails);
+  const userId = user?.id;
 
   const [captured, setCaptured] = useState("");
 
