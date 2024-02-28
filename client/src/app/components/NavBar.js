@@ -1,15 +1,19 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
-import { useState } from "react";
 
 import Login from "../buttons/Login";
 import Signup from "../buttons/Signup";
 
 const NavBar = () => {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
   const [isActive, setIsActive] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleClick = () => {
     setIsActive(!isActive);

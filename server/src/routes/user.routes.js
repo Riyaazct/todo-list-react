@@ -18,21 +18,7 @@ router
   .get([authJwt.verifyToken], controller.userBoard);
 
 router
-  .route("/mod")
-  .get(
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.moderatorBoard
-  );
-
-router
   .route("/admin")
   .get([authJwt.verifyToken, authJwt.isAdmin], controller.adminBoard);
-
-router
-  .route("/modoradmin")
-  .get(
-    [authJwt.verifyToken, authJwt.isModeratorOrAdmin],
-    controller.moderatorOrAdminBoard
-  );
 
 module.exports = router;

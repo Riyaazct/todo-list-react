@@ -48,6 +48,7 @@ const NewTask = ({ data, setData, getTodos }) => {
         <button
           className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
           type="submit"
+          onClick={handleSubmit}
         >
           Add Task
         </button>
