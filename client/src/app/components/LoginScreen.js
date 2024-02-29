@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
-import { setIsLoggedIn } from "../redux/usersSlice";
 
 const LoginScreen = () => {
-  const dispatch = useDispatch();
-
   const [loading, setLoading] = useState("");
   const [message, setMessage] = useState("");
 
@@ -39,7 +35,7 @@ const LoginScreen = () => {
       try {
         await AuthService.login(email, password);
         navigate("/");
-        dispatch(setIsLoggedIn(true));
+        window.location.reload();
       } catch (error) {
         const resMessage =
           (error.response &&

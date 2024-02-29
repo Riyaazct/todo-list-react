@@ -6,10 +6,8 @@ const user = TokenService.getUSer();
 
 const initialState = {
   isLoggedIn: false,
-  userDetails: user,
+  userDetails: user ? user : {},
 };
-
-console.log(initialState.isLoggedIn);
 
 const usersSlice = createSlice({
   name: "user",
@@ -23,7 +21,7 @@ const usersSlice = createSlice({
 
 export const { setIsLoggedIn } = usersSlice.actions;
 
-export const selectUserId = (state) => state.user.userId;
+export const selectUserId = (state) => state.user.userDetails.id;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectUserDetails = (state) => state.user.userDetails;
 
