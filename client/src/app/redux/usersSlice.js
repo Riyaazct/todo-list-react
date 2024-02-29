@@ -9,13 +9,19 @@ const initialState = {
   userDetails: user,
 };
 
+console.log(initialState.isLoggedIn);
+
 const usersSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // Code
+    setIsLoggedIn(state, action) {
+      state.isLoggedIn = action.payload;
+    },
   },
 });
+
+export const { setIsLoggedIn } = usersSlice.actions;
 
 export const selectUserId = (state) => state.user.userId;
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;

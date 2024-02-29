@@ -7,6 +7,7 @@ import { MdClose } from "react-icons/md";
 
 import Login from "../buttons/Login";
 import Signup from "../buttons/Signup";
+import Logout from "../buttons/Logout";
 
 const NavBar = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -75,6 +76,7 @@ const NavBar = () => {
       </div>
       {/* login and register buttons */}
       <div className="flex gap-1">
+        {isLoggedIn && <Logout />}
         {!isLoggedIn && <Login />}
         {!isLoggedIn && <Signup />}
       </div>
