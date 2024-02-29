@@ -12,6 +12,7 @@ const Logout = () => {
   const handleLogout = () => {
     removeUser();
     dispatch(setIsLoggedIn(false));
+    window.location.reload();
   };
 
   return (
