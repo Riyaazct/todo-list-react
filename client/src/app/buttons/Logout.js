@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import TokenService from "../services/token.service";
 import { setIsLoggedIn } from "../redux/usersSlice";
+
+const removeUser = TokenService.removeUser;
 
 const Logout = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    removeUser();
+    window.location.reload();
     dispatch(setIsLoggedIn(false));
   };
 

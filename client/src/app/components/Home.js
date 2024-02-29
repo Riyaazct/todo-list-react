@@ -1,35 +1,33 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import api from "../services/api";
 import NewTask from "./NewTask";
 import Tasks from "./Tasks";
+import { fetchTasks } from "../redux/tasksSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.user.userDetails);
   const userId = userDetails?.id;
+
+  const tasks = useSelector((state) => state.tasks.tasks);
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getTodos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+    dispatch(fetchTasks(userId));
+    setData(tasks);
 
-  const getTodos = async () => {
-    try {
-      if (!userId) return;
-      const response = await api.get(`/tasks/${userId}`);
-      setData(response.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    // getTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, dispatch]);
+
   return (
     <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
-      <NewTask data={data} setData={setData} getTodos={getTodos} />
+      <NewTask data={data} setData={setData} />
 
-      <Tasks data={data} setData={setData} getTodos={getTodos} />
+      <Tasks data={data} setData={setData} />
     </div>
   );
 };

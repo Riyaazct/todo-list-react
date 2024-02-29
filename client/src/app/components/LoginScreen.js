@@ -38,8 +38,8 @@ const LoginScreen = () => {
 
       try {
         await AuthService.login(email, password);
-        dispatch(setIsLoggedIn(true));
         navigate("/");
+        dispatch(setIsLoggedIn(true));
       } catch (error) {
         const resMessage =
           (error.response &&
