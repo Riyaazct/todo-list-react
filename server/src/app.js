@@ -39,7 +39,7 @@ app.use(
 // Require Routes
 app.use("/api", index);
 app.use("/api/auth", authRoute);
-app.use("/api/test", userRoute);
+app.use("/api", userRoute);
 app.use("/api/tasks", tasksRoute);
 
 module.exports = app;

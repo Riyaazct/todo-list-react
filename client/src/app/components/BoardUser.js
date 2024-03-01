@@ -12,7 +12,7 @@ const BoardUser = () => {
   useEffect(() => {
     UserService.getUserBoard().then(
       (response) => {
-        return response.data;
+        console.log(response);
       },
       (error) => {
         const _content =

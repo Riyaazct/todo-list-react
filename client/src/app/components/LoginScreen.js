@@ -34,7 +34,7 @@ const LoginScreen = () => {
 
       try {
         await AuthService.login(email, password);
-        navigate("/");
+        navigate("/user");
         window.location.reload();
       } catch (error) {
         const resMessage =

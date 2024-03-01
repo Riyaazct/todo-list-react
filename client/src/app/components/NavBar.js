@@ -15,7 +15,7 @@ const NavBar = () => {
       <div className="flex flex-col items-center justify-around w-full md:flex-row">
         <Link to="/">
           <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
-            My Todo App
+            Todo App
           </h1>
         </Link>
         {isLoggedIn && (

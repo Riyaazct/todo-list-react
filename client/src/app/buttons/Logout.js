@@ -12,12 +12,11 @@ const Logout = () => {
   const handleLogout = () => {
     removeUser();
     dispatch(setIsLoggedIn(false));
-    window.location.reload();
   };
 
   return (
     <Link
-      to="/login"
+      to="/"
       className="px-3 py-1 border border-gray-700 rounded-lg"
       onClick={handleLogout}
     >
