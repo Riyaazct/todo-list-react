@@ -10,7 +10,6 @@ import Signup from "../buttons/Signup";
 import Logout from "../buttons/Logout";
 
 const NavBar = () => {
-
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [isActive, setIsActive] = useState(false);
@@ -30,28 +29,25 @@ const NavBar = () => {
           </h1>
         </Link>
 
-        {isLoggedIn && (
-          <BiMenuAltRight
-            className={
-              !isActive
-                ? "absolute top-2 right-0 cursor-pointer md:hidden"
-                : "hidden"
-            }
-            onClick={handleClick}
-            size={40}
-          />
-        )}
-        {isLoggedIn && (
-          <MdClose
-            className={
-              isActive
-                ? "absolute top-2 right-0 cursor-pointer md:hidden"
-                : "hidden"
-            }
-            onClick={handleClick}
-            size={40}
-          />
-        )}
+        <BiMenuAltRight
+          className={
+            !isActive
+              ? "absolute top-2 right-0 cursor-pointer md:hidden"
+              : "hidden"
+          }
+          onClick={handleClick}
+          size={40}
+        />
+
+        <MdClose
+          className={
+            isActive
+              ? "absolute top-2 right-0 cursor-pointer md:hidden"
+              : "hidden"
+          }
+          onClick={handleClick}
+          size={40}
+        />
 
         <div
           className={
@@ -60,27 +56,30 @@ const NavBar = () => {
               : "hidden md:flex md:p-5 "
           }
         >
-          {isLoggedIn && (
-            <ul className="md:flex">
-              <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-                Home
-              </li>
-              <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-                Categories
-              </li>
-              <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
-                Completed Tasks
-              </li>
-            </ul>
+          {isActive && (
+            <div>
+              <ul className="md:flex">
+                <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                  Home
+                </li>
+                <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                  Categories
+                </li>
+                <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
+                  Completed Tasks
+                </li>
+              </ul>
+
+              <div className="flex gap-1">
+                {isLoggedIn && <Logout />}
+                {!isLoggedIn && <Login />}
+                {!isLoggedIn && <Signup />}
+              </div>
+            </div>
           )}
         </div>
       </div>
       {/* login and register buttons */}
-      <div className="flex gap-1">
-        {isLoggedIn && <Logout />}
-        {!isLoggedIn && <Login />}
-        {!isLoggedIn && <Signup />}
-      </div>
     </div>
   );
 };
