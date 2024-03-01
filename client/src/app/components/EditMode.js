@@ -54,6 +54,7 @@ const EditMode = ({
         value={currentText}
         placeholder={currentText}
         onChange={(e) => handleChange(e)}
+        autoFocus
       />
       <AiOutlineCheck
         className="cursor-pointer hover:transition-transform hover:scale-125 hover:duration-500"
