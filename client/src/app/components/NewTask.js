@@ -22,7 +22,7 @@ const NewTask = () => {
           .then((response) => {
             setCaptured("");
             dispatch(fetchTasks(userId));
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((error) => {
             console.error(error.message);
