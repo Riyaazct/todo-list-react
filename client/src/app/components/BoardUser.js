@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
+import NewTask from "./NewTask";
+import Tasks from "./Tasks";
+
 const BoardUser = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
     UserService.getUserBoard().then(
       (response) => {
-        setContent(response.data);
+        return response.data;
       },
       (error) => {
         const _content =
@@ -29,10 +32,10 @@ const BoardUser = () => {
   }, []);
 
   return (
-    <div className="container">
-      <header>
-        <h3>{content}</h3>
-      </header>
+    <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
+      <NewTask />
+
+      <Tasks />
     </div>
   );
 };

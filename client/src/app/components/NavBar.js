@@ -10,6 +10,7 @@ import Signup from "../buttons/Signup";
 import Logout from "../buttons/Logout";
 
 const NavBar = () => {
+
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [isActive, setIsActive] = useState(false);
