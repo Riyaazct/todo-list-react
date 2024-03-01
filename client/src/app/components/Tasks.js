@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import ClearList from "../buttons/ClearList";
 import Delete from "../buttons/Delete";
 import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
+import { fetchTasks } from "../redux/tasksSlice";
+import { selectUserId, setIsLoggedIn } from "../redux/usersSlice";
 
-const Tasks = ({ data, setData, getTodos }) => {
+const Tasks = () => {
+  const dispatch = useDispatch();
+
+  const userId = useSelector(selectUserId);
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const taskStatus = useSelector((state) => state.tasks.status);
+
   // set edit mode
   const [editing, setEditing] = useState(false);
   //id for identifying which line to render the input for editing
   const [idForEditing, setIdForEditing] = useState(null);
   // capture the text to use as placeholder in edit mode
   const [currentText, setCurrentText] = useState("");
+
+  useEffect(() => {
+    if (userId && taskStatus === "idle") {
+      dispatch(fetchTasks(userId));
+      dispatch(setIsLoggedIn(true));
+    }
+  }, [userId, dispatch, taskStatus]);
 
   return (
     <div>
@@ -19,7 +36,7 @@ const Tasks = ({ data, setData, getTodos }) => {
       </h2>
       <div className="w-full h-auto p-4 m-auto bg-gray-200 border-2 border-gray-300 rounded-xl">
         {/*RENDER THE DATA*/}
-        {data.map(({ task, id, user_id: userId }, index) => (
+        {tasks.map(({ task, id, user_id: userId }, index) => (
           <div className="flex items-center gap-2" key={index}>
             <p className="my-1 md:text-2xl">{`${index + 1}.`}</p>
 
@@ -31,21 +48,12 @@ const Tasks = ({ data, setData, getTodos }) => {
                 setCurrentText={setCurrentText}
                 id={id}
                 userId={userId}
-                data={data}
-                getTodos={getTodos}
-                setData={setData}
               />
             ) : (
               <p className="w-full my-1 md:text-xl">{task}</p>
             )}
             <div className="flex gap-2 ml-auto cursor-pointer">
-              <Delete
-                data={data}
-                setData={setData}
-                id={id}
-                userId={userId}
-                getTodos={getTodos}
-              />
+              <Delete id={id} userId={userId} />
               <Edit
                 id={id}
                 userId={userId}
@@ -59,9 +67,7 @@ const Tasks = ({ data, setData, getTodos }) => {
         ))}
       </div>
       {/* IF TASKS EXIST, SHOW BUTTON, ELSE DON'T */}
-      {data.length !== 0 && (
-        <ClearList getTodos={getTodos} userId={data.userId} />
-      )}
+      {tasks.length !== 0 && <ClearList />}
     </div>
   );
 };

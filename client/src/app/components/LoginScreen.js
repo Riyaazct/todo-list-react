@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -33,8 +34,7 @@ const LoginScreen = () => {
 
       try {
         await AuthService.login(email, password);
-
-        navigate("/");
+        navigate("/user");
         window.location.reload();
       } catch (error) {
         const resMessage =

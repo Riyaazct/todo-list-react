@@ -7,7 +7,7 @@ const Login = () => {
       to="/login"
       className="px-3 py-1 border border-gray-700 rounded-lg"
     >
-      Login{" "}
+      Login
     </Link>
   );
 };

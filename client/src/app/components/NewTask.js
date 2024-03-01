@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import api from "../services/api";
 
-const NewTask = ({ data, setData, getTodos }) => {
-  const user = useSelector((state) => state.user.userDetails);
-  const userId = user?.id;
+import { selectUserId } from "../redux/usersSlice";
+import { fetchTasks } from "../redux/tasksSlice";
+
+const NewTask = () => {
+  const dispatch = useDispatch();
+  const userId = useSelector(selectUserId);
 
   const [captured, setCaptured] = useState("");
 
@@ -17,8 +20,9 @@ const NewTask = ({ data, setData, getTodos }) => {
         return await api
           .post("/tasks/new", { task: captured, user_id: userId })
           .then((response) => {
-            getTodos();
             setCaptured("");
+            dispatch(fetchTasks(userId));
+            window.location.reload();
           })
           .catch((error) => {
             console.error(error.message);
@@ -48,6 +52,7 @@ const NewTask = ({ data, setData, getTodos }) => {
         <button
           className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
           type="submit"
+          onClick={handleSubmit}
         >
           Add Task
         </button>

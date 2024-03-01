@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import api from "../services/api";
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+
+import { fetchTasks } from "../redux/tasksSlice";
 
 const EditMode = ({
   setEditing,
@@ -9,14 +12,17 @@ const EditMode = ({
   data,
   id,
   userId,
-  getTodos,
 }) => {
+  const dispatch = useDispatch();
+
+  const tasks = useSelector((state) => state.tasks.tasks);
+
   //FUNCTION TO HANDLE THE ACCEPTANCE OF EDIT
 
   const handleSubmitForAcceptingEdit = async (e) => {
     // e.preventDefault();
     try {
-      const foundTask = data.some(
+      const foundTask = tasks.some(
         (task) => task.id === id && task.user_id === userId
       );
 
@@ -28,7 +34,7 @@ const EditMode = ({
           }
         );
         setEditing(false);
-        getTodos();
+        dispatch(fetchTasks(userId));
         return response.data;
       }
     } catch (err) {
