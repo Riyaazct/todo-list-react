@@ -58,19 +58,21 @@ const NavBar = () => {
         >
           {isActive && (
             <div>
-              <ul className="md:flex">
-                <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-                  Home
-                </li>
-                <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
-                  Categories
-                </li>
-                <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
-                  Completed Tasks
-                </li>
-              </ul>
+              {isLoggedIn && (
+                <ul className="md:flex">
+                  <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                    Home
+                  </li>
+                  <li className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+                    Categories
+                  </li>
+                  <li className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5">
+                    Completed Tasks
+                  </li>
+                </ul>
+              )}
 
-              <div className="flex gap-1">
+              <div className="flex justify-center gap-1">
                 {isLoggedIn && <Logout />}
                 {!isLoggedIn && <Login />}
                 {!isLoggedIn && <Signup />}
