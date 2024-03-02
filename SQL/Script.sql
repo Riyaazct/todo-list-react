@@ -40,3 +40,19 @@ CREATE TABLE tasks (
 );
 
 
+
+
+
+
+
+select * from users;
+
+select * from tasks where user_id = 13;
+
+select * from tasks;
+
+select * from roles;
+
+select * from user_roles;
+
+
