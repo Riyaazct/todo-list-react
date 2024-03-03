@@ -6,6 +6,7 @@ import Delete from "../buttons/Delete";
 import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
 import Archive from "../buttons/Archive";
+import Completed from "../buttons/Completed.js";
 
 import { fetchTasks } from "../redux/tasksSlice";
 import { selectUserId, setIsLoggedIn } from "../redux/usersSlice";
@@ -55,6 +56,7 @@ const Tasks = () => {
               <p className="w-full my-1 md:text-xl">{task}</p>
             )}
             <div className="flex gap-2 ml-auto cursor-pointer">
+              <Completed id={id} userId={userId} />
               <Edit
                 id={id}
                 userId={userId}

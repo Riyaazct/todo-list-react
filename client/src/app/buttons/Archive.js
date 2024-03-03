@@ -5,7 +5,7 @@ const Archive = () => {
   return (
     <div>
       {/* <IoMdArchive /> */}
-      <BiArchiveIn size={20} />
+      <BiArchiveIn size={25} />
     </div>
   );
 };

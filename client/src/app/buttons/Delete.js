@@ -18,7 +18,7 @@ const Delete = ({ id, userId }) => {
     }
   };
 
-  return <FiDelete size={20} onClick={handleDelete} />;
+  return <FiDelete size={25} onClick={handleDelete} />;
 };
 
 export default Delete;
