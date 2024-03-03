@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -15,7 +14,7 @@ const NavBar = () => {
       <div className="flex flex-col items-center justify-around w-full md:flex-row">
         <Link to={isLoggedIn ? "/user" : "/"}>
           <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
-            Todo App
+            To-do App
           </h1>
         </Link>
         {isLoggedIn && (
