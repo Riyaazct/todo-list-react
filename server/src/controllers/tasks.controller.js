@@ -85,12 +85,11 @@ exports.deleteTask = async (req, res) => {
 };
 
 exports.clearTasks = async (req, res) => {
-  const id = req.params.id;
   const userId = req.params.user_id;
 
   try {
     const deleteQuery = {
-      text: "DELETE FROM tasks WHERE user_id = $1",
+      text: "UPDATE tasks SET is_deleted = true WHERE user_id = $1",
       values: [userId],
     };
 

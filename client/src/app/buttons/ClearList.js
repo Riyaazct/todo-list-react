@@ -9,8 +9,7 @@ const ClearList = ({ getTodos }) => {
   //HANDLE DELETE ALL FUNCTION
   const handleDeleteAll = async () => {
     try {
-      await api.delete(`/tasks/clear/${userId}`);
-      getTodos();
+      await api.put(`/tasks/clear/${userId}`);
     } catch (err) {
       console.error(err.message);
     }
