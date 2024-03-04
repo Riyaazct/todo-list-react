@@ -10,7 +10,16 @@ exports.allTasks = async (req, res) => {
   try {
     const tasksReturned = await db.query(tasksQuery);
 
-    return res.status(200).send(tasksReturned.rows);
+    return res
+      .status(200)
+      .send(
+        tasksReturned.rows.filter(
+          (task) =>
+            !task.is_deleted &&
+            !task.is_completed &&
+            !task.is_archived
+        )
+      );
   } catch (error) {
     console.error(error.message);
     res.status(500).send({
@@ -39,7 +48,7 @@ exports.addNewTask = async (req, res) => {
     }
 
     const addNewTaskQuery = {
-      text: "INSERT INTO tasks (task, user_id) values ($1, $2) RETURNING task",
+      text: "INSERT INTO tasks (task, user_id, is_deleted, is_completed, is_archived) values ($1, $2, false, false, false) RETURNING task",
       values: [task, user_id],
     };
 
@@ -68,7 +77,7 @@ exports.deleteTask = async (req, res) => {
     }
 
     const deleteTaskQuery = {
-      text: "DELETE FROM tasks WHERE id = $1 AND user_id = $2 RETURNING task",
+      text: "UPDATE tasks SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING *",
       values: [id, userId],
     };
 
@@ -85,12 +94,11 @@ exports.deleteTask = async (req, res) => {
 };
 
 exports.clearTasks = async (req, res) => {
-  const id = req.params.id;
   const userId = req.params.user_id;
 
   try {
     const deleteQuery = {
-      text: "DELETE FROM tasks WHERE user_id = $1",
+      text: "UPDATE tasks SET is_deleted = true WHERE user_id = $1",
       values: [userId],
     };
 

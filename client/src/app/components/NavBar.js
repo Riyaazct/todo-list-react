@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -13,14 +12,17 @@ const NavBar = () => {
   return (
     <nav className="flex items-center w-screen p-4 bg-gray-200 border-b-2 border-gray-300 sm:flex-row">
       <div className="flex flex-col items-center justify-around w-full md:flex-row">
-        <Link to="/">
+        <Link to={isLoggedIn ? "/user" : "/"}>
           <h1 className="text-2xl font-bold text-blue-600 lg:text-3xl ">
-            Todo App
+            To-do App
           </h1>
         </Link>
         {isLoggedIn && (
           <div>
-            <Link className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
+            <Link
+              to="/user"
+              className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5"
+            >
               Home
             </Link>
             <Link className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">

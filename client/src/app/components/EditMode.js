@@ -59,14 +59,14 @@ const EditMode = ({
       <AiOutlineCheck
         className="cursor-pointer hover:transition-transform hover:scale-125 hover:duration-500"
         color="green"
-        size={20}
+        size={25}
         onClick={(e) => handleSubmitForAcceptingEdit(e, id)}
       />
 
       <AiOutlineClose
         className="cursor-pointer hover:transition-transform hover:scale-125 hover:duration-500"
         color="red"
-        size={20}
+        size={25}
         onClick={() => {
           setEditing(false);
         }}

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
-import NewTask from "./NewTask";
-import Tasks from "./Tasks";
+import NewTask from "../components/NewTask";
+import Tasks from "../components/Tasks";
 
 const BoardUser = () => {
   const [content, setContent] = useState("");
@@ -33,9 +33,18 @@ const BoardUser = () => {
 
   return (
     <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
-      <NewTask />
+      {!content && (
+        <div>
+          <NewTask />
+          <Tasks />
+        </div>
+      )}
 
-      <Tasks />
+      {content && (
+        <div className="flex items-center justify-center h-[80vh] text-5xl">
+          Restricted access, Please Log in or Register!
+        </div>
+      )}
     </div>
   );
 };

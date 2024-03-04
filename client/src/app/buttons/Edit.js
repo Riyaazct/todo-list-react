@@ -14,7 +14,7 @@ const Edit = ({
     setCurrentText(task);
   };
 
-  return <AiOutlineEdit size={20} onClick={() => handleClick(id)} />;
+  return <AiOutlineEdit size={25} onClick={() => handleClick(id)} />;
 };
 
 export default Edit;

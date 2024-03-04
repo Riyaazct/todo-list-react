@@ -1,16 +1,18 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import api from "../services/api";
 import React from "react";
 import { AiOutlineClear } from "react-icons/ai";
+import { fetchTasks } from "../redux/tasksSlice";
 
 const ClearList = ({ getTodos }) => {
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userDetails.id);
 
   //HANDLE DELETE ALL FUNCTION
   const handleDeleteAll = async () => {
     try {
-      await api.delete(`/tasks/clear/${userId}`);
-      getTodos();
+      await api.put(`/tasks/clear/${userId}`);
+      dispatch(fetchTasks(userId));
     } catch (err) {
       console.error(err.message);
     }

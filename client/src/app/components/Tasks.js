@@ -5,6 +5,9 @@ import ClearList from "../buttons/ClearList";
 import Delete from "../buttons/Delete";
 import Edit from "../buttons/Edit";
 import EditMode from "./EditMode";
+import Archive from "../buttons/Archive";
+import Completed from "../buttons/Completed.js";
+
 import { fetchTasks } from "../redux/tasksSlice";
 import { selectUserId, setIsLoggedIn } from "../redux/usersSlice";
 
@@ -32,7 +35,7 @@ const Tasks = () => {
   return (
     <div>
       <h2 className="mt-16 mb-2 text-4xl font-bold text-center text-gray-800">
-        TODOS
+        TASKS
       </h2>
       <div className="w-full h-auto p-4 m-auto bg-gray-200 border-2 border-gray-300 rounded-xl">
         {/*RENDER THE DATA*/}
@@ -53,7 +56,7 @@ const Tasks = () => {
               <p className="w-full my-1 md:text-xl">{task}</p>
             )}
             <div className="flex gap-2 ml-auto cursor-pointer">
-              <Delete id={id} userId={userId} />
+              <Completed id={id} userId={userId} />
               <Edit
                 id={id}
                 userId={userId}
@@ -62,6 +65,8 @@ const Tasks = () => {
                 setCurrentText={setCurrentText}
                 task={task}
               />
+              <Delete id={id} userId={userId} />
+              <Archive id={id} userId={userId} />
             </div>
           </div>
         ))}
