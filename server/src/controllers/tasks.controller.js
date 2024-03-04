@@ -77,7 +77,7 @@ exports.deleteTask = async (req, res) => {
     }
 
     const deleteTaskQuery = {
-      text: "UPDATE tasks SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING task",
+      text: "UPDATE tasks SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING *",
       values: [id, userId],
     };
 
