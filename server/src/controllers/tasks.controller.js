@@ -2,6 +2,7 @@ const db = require("../config/database");
 
 exports.allTasks = async (req, res) => {
   const userId = parseInt(req.params.id);
+  const taskStatus = req.params.status;
 
   const tasksQuery = {
     text: "SELECT * FROM tasks where user_id = $1",
@@ -12,14 +13,7 @@ exports.allTasks = async (req, res) => {
 
     return res
       .status(200)
-      .send(
-        tasksReturned.rows.filter(
-          (task) =>
-            !task.is_deleted &&
-            !task.is_completed &&
-            !task.is_archived
-        )
-      );
+      .send(tasksReturned.rows.filter((task) => task[taskStatus]));
   } catch (error) {
     console.error(error.message);
     res.status(500).send({

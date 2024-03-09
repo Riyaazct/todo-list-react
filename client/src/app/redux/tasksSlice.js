@@ -4,8 +4,9 @@ import api from "../services/api";
 
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
-  async (userId) => {
-    const response = await api.get(`/tasks/${userId}`);
+  async ({ userId, taskStatus }) => {
+    console.log(taskStatus);
+    const response = await api.get(`/tasks/${userId}/${taskStatus}`);
     return response.data;
   }
 );
