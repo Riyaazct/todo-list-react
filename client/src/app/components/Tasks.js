@@ -24,7 +24,7 @@ const Tasks = () => {
   const [idForEditing, setIdForEditing] = useState(null);
   // capture the text to use as placeholder in edit mode
   const [currentText, setCurrentText] = useState("");
-  const [taskStatus, setTaskStatus] = useState("is_active");
+  const [taskStatus, setTaskStatus] = useState("is_deleted");
 
   useEffect(() => {
     if (userId && taskFetchStatus === "idle") {
