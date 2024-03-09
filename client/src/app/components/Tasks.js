@@ -16,7 +16,8 @@ const Tasks = () => {
 
   const userId = useSelector(selectUserId);
   const tasks = useSelector((state) => state.tasks.tasks);
-  const taskFetchStatus = useSelector((state) => state.tasks.status);
+  const taskStatus = useSelector((state) => state.tasks.taskStatus);
+  const tasksFetchStatus = useSelector((state) => state.tasks.status);
 
   // set edit mode
   const [editing, setEditing] = useState(false);
@@ -24,14 +25,13 @@ const Tasks = () => {
   const [idForEditing, setIdForEditing] = useState(null);
   // capture the text to use as placeholder in edit mode
   const [currentText, setCurrentText] = useState("");
-  const [taskStatus, setTaskStatus] = useState("is_deleted");
 
   useEffect(() => {
-    if (userId && taskFetchStatus === "idle") {
+    if (userId && tasksFetchStatus === "idle") {
       dispatch(fetchTasks({ userId, taskStatus }));
       dispatch(setIsLoggedIn(true));
     }
-  }, [userId, dispatch, taskFetchStatus, taskStatus]);
+  }, [userId, dispatch, tasksFetchStatus, taskStatus]);
 
   return (
     <div>
