@@ -144,3 +144,40 @@ exports.updateTask = async (req, res) => {
     res.status(500).send({ message: "An error occurred" });
   }
 };
+
+exports.updateTaskStatus = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const userId = parseInt(req.params.user_id);
+  const { task_status } = req.body;
+  console.log(task_status);
+
+  const findTaskQuery = {
+    text: "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
+    values: [id, userId],
+  };
+  try {
+    const foundTask = await db.query(findTaskQuery);
+
+    if (foundTask.rows.length === 0) {
+      return res
+        .status(409)
+        .send({ message: "Task does not exist." });
+    }
+
+    const updateTaskStatusQuery = {
+      text: "UPDATE tasks SET task_status = $1 WHERE id = $2 AND user_id = $3 RETURNING task",
+      values: [task_status, id, userId],
+    };
+
+    const updatedTask = await db.query(updateTaskStatusQuery);
+    console.log(updatedTask.rows);
+
+    res.status(200).send({
+      message: "Task Status successfully updated",
+      task: updatedTask.rows,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: "An error occurred." });
+  }
+};
