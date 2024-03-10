@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MdOutlineTaskAlt } from "react-icons/md";
 
 const Completed = ({ id }) => {
