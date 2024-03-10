@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -8,15 +9,23 @@ import Logout from "../buttons/Logout";
 
 import { fetchTasks } from "../redux/tasksSlice";
 import { selectUserId } from "../redux/usersSlice";
+import { updateTaskStatus } from "../redux/tasksSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const userId = useSelector(selectUserId);
+  const taskStatus = useSelector((state) => state.tasks.taskStatus);
+
+  useEffect(() => {
+    if (taskStatus === "is_completed") {
+      dispatch(fetchTasks({ userId, taskStatus }));
+    }
+  }, [dispatch, userId, taskStatus]);
 
   const handleOnClick = () => {
-    dispatch(fetchTasks({ userId, taskStatus: "is_completed" }));
+    dispatch(updateTaskStatus("is_completed"));
   };
 
   return (

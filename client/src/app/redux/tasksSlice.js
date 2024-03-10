@@ -13,7 +13,7 @@ export const fetchTasks = createAsyncThunk(
 const initialState = {
   tasks: [],
   status: "idle",
-  taskStatus: "is_active",
+  taskStatus: "active",
   error: null,
 };
 
