@@ -20,7 +20,6 @@ const EditMode = ({
   //FUNCTION TO HANDLE THE ACCEPTANCE OF EDIT
 
   const handleSubmitForAcceptingEdit = async (e) => {
-    // e.preventDefault();
     try {
       const foundTask = tasks.some(
         (task) => task.id === id && task.user_id === userId
@@ -34,7 +33,7 @@ const EditMode = ({
           }
         );
         setEditing(false);
-        dispatch(fetchTasks(userId));
+        dispatch(fetchTasks({ userId }));
         return response.data;
       }
     } catch (err) {
