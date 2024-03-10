@@ -10,7 +10,10 @@ const Delete = ({ id, userId }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await api.put(`/tasks/delete/${id}/${userId}`);
+      const response = await api.put(
+        `/tasks/status_update/${id}/${userId}`,
+        { task_status: "deleted" }
+      );
       dispatch(fetchTasks({ userId, taskStatus }));
 
       return response.data;
