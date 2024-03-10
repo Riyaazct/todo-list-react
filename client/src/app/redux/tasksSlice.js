@@ -5,7 +5,9 @@ import api from "../services/api";
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
   async ({ userId, taskStatus }) => {
-    const response = await api.get(`/tasks/${userId}/${taskStatus}`);
+    const response = await api.get(
+      `/tasks/${userId}/${taskStatus || "active"}`
+    );
     return response.data;
   }
 );

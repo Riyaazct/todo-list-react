@@ -17,7 +17,7 @@ const ClearList = ({ getTodos }) => {
     if (shouldDelete) {
       try {
         await api.put(`/tasks/clear/${userId}`);
-        dispatch(fetchTasks(userId));
+        dispatch(fetchTasks({ userId }));
       } catch (err) {
         console.error(err.message);
       }

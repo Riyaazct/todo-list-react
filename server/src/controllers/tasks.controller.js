@@ -89,7 +89,7 @@ exports.deleteTask = async (req, res) => {
 };
 
 exports.clearTasks = async (req, res) => {
-  const userId = req.params.user_id;
+  const userId = Number(req.params.user_id);
 
   try {
     const deleteQuery = {
