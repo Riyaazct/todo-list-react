@@ -56,39 +56,6 @@ exports.addNewTask = async (req, res) => {
   }
 };
 
-exports.deleteTask = async (req, res) => {
-  const userId = parseInt(req.params.user_id);
-  const id = parseInt(req.params.id);
-
-  const findTaskQuery = {
-    text: "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
-    values: [id, userId],
-  };
-
-  try {
-    const findTaskById = await db.query(findTaskQuery);
-
-    if (findTaskById.rows.length === 0) {
-      return res.status(409).send({ message: "task does not exist" });
-    }
-
-    const deleteTaskQuery = {
-      text: "UPDATE tasks SET task_status = 'deleted' WHERE id = $1 AND user_id = $2 RETURNING *",
-      values: [id, userId],
-    };
-
-    const taskDeleted = await db.query(deleteTaskQuery);
-
-    return res.status(200).send({
-      message: `Task with id ${id} successfully deleted`,
-      task: taskDeleted.rows[0],
-    });
-  } catch (error) {
-    console.error(error.message);
-    res.status(200).send({ message: "An error occurred!" });
-  }
-};
-
 exports.clearTasks = async (req, res) => {
   const userId = Number(req.params.user_id);
 
