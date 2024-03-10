@@ -21,7 +21,7 @@ const NewTask = () => {
           .post("/tasks/new", { task: captured, user_id: userId })
           .then((response) => {
             setCaptured("");
-            dispatch(fetchTasks(userId));
+            dispatch(fetchTasks({ userId }));
           })
           .catch((error) => {
             console.error(error.message);

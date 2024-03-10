@@ -26,14 +26,15 @@ exports.allTasks = async (req, res) => {
 
 exports.addNewTask = async (req, res) => {
   const { task, user_id } = req.body;
-
+  const convertedTask = task.toLowerCase();
   try {
     const checkTaskExistsQuery = {
-      text: "SELECT * FROM tasks WHERE task = $1 AND user_id = $2",
-      values: [task, user_id],
+      text: "SELECT * FROM tasks WHERE task = $1 AND user_id = $2 AND task_status = 'active'",
+      values: [convertedTask, user_id],
     };
 
     const existingTask = await db.query(checkTaskExistsQuery);
+    console.log(existingTask);
 
     if (existingTask.rows.length > 0) {
       return res.status(409).send({
@@ -43,7 +44,7 @@ exports.addNewTask = async (req, res) => {
     }
 
     const addNewTaskQuery = {
-      text: "INSERT INTO tasks (task, user_id, task_status) values ($1, $2, active) RETURNING task",
+      text: "INSERT INTO tasks (task, user_id, task_status) values ($1, $2, 'active') RETURNING task",
       values: [task, user_id],
     };
 
