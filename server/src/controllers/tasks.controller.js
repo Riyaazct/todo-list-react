@@ -11,7 +11,7 @@ exports.allTasks = async (req, res) => {
   try {
     const tasksReturned = await db.query(tasksQuery);
     const filteredTasks = tasksReturned.rows.filter(
-      (task) => (task.task_status = taskStatus)
+      (task) => task.task_status === taskStatus
     );
 
     return res.status(200).send(filteredTasks);
@@ -72,7 +72,7 @@ exports.deleteTask = async (req, res) => {
     }
 
     const deleteTaskQuery = {
-      text: "UPDATE tasks SET task_status = deleted WHERE id = $1 AND user_id = $2 RETURNING *",
+      text: "UPDATE tasks SET task_status = 'deleted' WHERE id = $1 AND user_id = $2 RETURNING *",
       values: [id, userId],
     };
 
@@ -93,7 +93,7 @@ exports.clearTasks = async (req, res) => {
 
   try {
     const deleteQuery = {
-      text: "UPDATE tasks SET task_status = deleted WHERE user_id = $1",
+      text: "UPDATE tasks SET task_status = 'deleted' WHERE user_id = $1",
       values: [userId],
     };
 
