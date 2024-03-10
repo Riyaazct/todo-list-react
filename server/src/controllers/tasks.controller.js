@@ -34,7 +34,6 @@ exports.addNewTask = async (req, res) => {
     };
 
     const existingTask = await db.query(checkTaskExistsQuery);
-    console.log(existingTask);
 
     if (existingTask.rows.length > 0) {
       return res.status(409).send({
@@ -116,7 +115,6 @@ exports.updateTaskStatus = async (req, res) => {
   const id = parseInt(req.params.id);
   const userId = parseInt(req.params.user_id);
   const { task_status } = req.body;
-  console.log(task_status);
 
   const findTaskQuery = {
     text: "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
@@ -137,7 +135,6 @@ exports.updateTaskStatus = async (req, res) => {
     };
 
     const updatedTask = await db.query(updateTaskStatusQuery);
-    console.log(updatedTask.rows);
 
     res.status(200).send({
       message: "Task Status successfully updated",
