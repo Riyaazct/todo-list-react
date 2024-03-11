@@ -19,13 +19,13 @@ const NavBar = () => {
   const taskStatus = useSelector((state) => state.tasks.taskStatus);
 
   useEffect(() => {
-    if (taskStatus === "is_completed") {
+    if (taskStatus) {
       dispatch(fetchTasks({ userId, taskStatus }));
     }
   }, [dispatch, userId, taskStatus]);
 
-  const handleOnClick = () => {
-    dispatch(updateTaskStatus("is_completed"));
+  const handleOnClick = (status) => {
+    dispatch(updateTaskStatus(status));
   };
 
   return (
@@ -49,9 +49,15 @@ const NavBar = () => {
             </Link>
             <Link
               className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
-              onClick={handleOnClick}
+              onClick={() => handleOnClick("completed")}
             >
               Completed Tasks
+            </Link>
+            <Link
+              className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
+              onClick={() => handleOnClick("deleted")}
+            >
+              Deleted Tasks
             </Link>
           </div>
         )}
