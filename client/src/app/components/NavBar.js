@@ -39,10 +39,10 @@ const NavBar = () => {
         {isLoggedIn && (
           <div>
             <Link
-              to="/user"
               className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5"
+              onClick={() => handleOnClick("active")}
             >
-              Home
+              Active Tasks
             </Link>
             <Link className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
               Categories
