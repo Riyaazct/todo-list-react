@@ -4,8 +4,10 @@ import api from "../services/api";
 
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
-  async (userId) => {
-    const response = await api.get(`/tasks/${userId}`);
+  async ({ userId, taskStatus }) => {
+    const response = await api.get(
+      `/tasks/${userId}/${taskStatus || "active"}`
+    );
     return response.data;
   }
 );
@@ -13,13 +15,22 @@ export const fetchTasks = createAsyncThunk(
 const initialState = {
   tasks: [],
   status: "idle",
+  taskStatus: "active",
+  taskTitle: "Tasks",
   error: null,
 };
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    updateTaskStatus: (state, action) => {
+      state.taskStatus = action.payload;
+    },
+    updateTaskTitle: (state, action) => {
+      state.taskTitle = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchTasks.pending, (state, action) => {
@@ -35,5 +46,8 @@ const tasksSlice = createSlice({
       });
   },
 });
+
+export const { updateTaskStatus, updateTaskTitle } =
+  tasksSlice.actions;
 
 export default tasksSlice.reducer;

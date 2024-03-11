@@ -10,11 +10,17 @@ const ClearList = ({ getTodos }) => {
 
   //HANDLE DELETE ALL FUNCTION
   const handleDeleteAll = async () => {
-    try {
-      await api.put(`/tasks/clear/${userId}`);
-      dispatch(fetchTasks(userId));
-    } catch (err) {
-      console.error(err.message);
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete all tasks?"
+    );
+
+    if (shouldDelete) {
+      try {
+        await api.put(`/tasks/clear/${userId}`);
+        dispatch(fetchTasks({ userId }));
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   };
 

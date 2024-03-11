@@ -2,6 +2,7 @@ const db = require("../config/database");
 
 exports.allTasks = async (req, res) => {
   const userId = parseInt(req.params.id);
+  const taskStatus = req.params.status;
 
   const tasksQuery = {
     text: "SELECT * FROM tasks where user_id = $1",
@@ -9,17 +10,11 @@ exports.allTasks = async (req, res) => {
   };
   try {
     const tasksReturned = await db.query(tasksQuery);
+    const filteredTasks = tasksReturned.rows.filter(
+      (task) => task.task_status === taskStatus
+    );
 
-    return res
-      .status(200)
-      .send(
-        tasksReturned.rows.filter(
-          (task) =>
-            !task.is_deleted &&
-            !task.is_completed &&
-            !task.is_archived
-        )
-      );
+    return res.status(200).send(filteredTasks);
   } catch (error) {
     console.error(error.message);
     res.status(500).send({
@@ -31,11 +26,11 @@ exports.allTasks = async (req, res) => {
 
 exports.addNewTask = async (req, res) => {
   const { task, user_id } = req.body;
-
+  const convertedTask = task.toLowerCase();
   try {
     const checkTaskExistsQuery = {
-      text: "SELECT * FROM tasks WHERE task = $1 AND user_id = $2",
-      values: [task, user_id],
+      text: "SELECT * FROM tasks WHERE task = $1 AND user_id = $2 AND task_status = 'active'",
+      values: [convertedTask, user_id],
     };
 
     const existingTask = await db.query(checkTaskExistsQuery);
@@ -48,7 +43,7 @@ exports.addNewTask = async (req, res) => {
     }
 
     const addNewTaskQuery = {
-      text: "INSERT INTO tasks (task, user_id, is_deleted, is_completed, is_archived) values ($1, $2, false, false, false) RETURNING task",
+      text: "INSERT INTO tasks (task, user_id, task_status) values ($1, $2, 'active') RETURNING task",
       values: [task, user_id],
     };
 
@@ -60,45 +55,12 @@ exports.addNewTask = async (req, res) => {
   }
 };
 
-exports.deleteTask = async (req, res) => {
-  const userId = parseInt(req.params.user_id);
-  const id = parseInt(req.params.id);
-
-  const findTaskQuery = {
-    text: "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
-    values: [id, userId],
-  };
-
-  try {
-    const findTaskById = await db.query(findTaskQuery);
-
-    if (findTaskById.rows.length === 0) {
-      return res.status(409).send({ message: "task does not exist" });
-    }
-
-    const deleteTaskQuery = {
-      text: "UPDATE tasks SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING *",
-      values: [id, userId],
-    };
-
-    const taskDeleted = await db.query(deleteTaskQuery);
-
-    return res.status(200).send({
-      message: `Task with id ${id} successfully deleted`,
-      task: taskDeleted.rows[0],
-    });
-  } catch (error) {
-    console.error(error.message);
-    res.status(200).send({ message: "An error occurred!" });
-  }
-};
-
 exports.clearTasks = async (req, res) => {
-  const userId = req.params.user_id;
+  const userId = Number(req.params.user_id);
 
   try {
     const deleteQuery = {
-      text: "UPDATE tasks SET is_deleted = true WHERE user_id = $1",
+      text: "UPDATE tasks SET task_status = 'deleted' WHERE user_id = $1",
       values: [userId],
     };
 
@@ -146,5 +108,40 @@ exports.updateTask = async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: "An error occurred" });
+  }
+};
+
+exports.updateTaskStatus = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const userId = parseInt(req.params.user_id);
+  const { task_status } = req.body;
+
+  const findTaskQuery = {
+    text: "SELECT * FROM tasks WHERE id = $1 AND user_id = $2",
+    values: [id, userId],
+  };
+  try {
+    const foundTask = await db.query(findTaskQuery);
+
+    if (foundTask.rows.length === 0) {
+      return res
+        .status(409)
+        .send({ message: "Task does not exist." });
+    }
+
+    const updateTaskStatusQuery = {
+      text: "UPDATE tasks SET task_status = $1 WHERE id = $2 AND user_id = $3 RETURNING task",
+      values: [task_status, id, userId],
+    };
+
+    const updatedTask = await db.query(updateTaskStatusQuery);
+
+    res.status(200).send({
+      message: "Task Status successfully updated",
+      task: updatedTask.rows,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: "An error occurred." });
   }
 };
