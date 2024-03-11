@@ -22,7 +22,11 @@ const Delete = ({ id, userId }) => {
     }
   };
 
-  return <FiDelete size={25} onClick={handleDelete} />;
+  return (
+    <div className={taskStatus === "deleted" ? "hidden" : "block"}>
+      <FiDelete size={25} onClick={handleDelete} />
+    </div>
+  );
 };
 
 export default Delete;
