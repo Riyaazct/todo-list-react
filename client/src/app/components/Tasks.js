@@ -18,6 +18,7 @@ const Tasks = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const taskStatus = useSelector((state) => state.tasks.taskStatus);
   const tasksFetchStatus = useSelector((state) => state.tasks.status);
+  const taskTitle = useSelector((state) => state.tasks.taskTitle);
 
   // set edit mode
   const [editing, setEditing] = useState(false);
@@ -36,7 +37,7 @@ const Tasks = () => {
   return (
     <div>
       <h2 className="mt-16 mb-2 text-4xl font-bold text-center text-gray-800">
-        TASKS
+        {taskTitle}
       </h2>
       <div className="w-full h-auto p-4 m-auto bg-gray-200 border-2 border-gray-300 rounded-xl">
         {/*RENDER THE DATA*/}

@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../services/api";
 import { FiDelete } from "react-icons/fi";

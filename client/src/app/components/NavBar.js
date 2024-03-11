@@ -9,7 +9,10 @@ import Logout from "../buttons/Logout";
 
 import { fetchTasks } from "../redux/tasksSlice";
 import { selectUserId } from "../redux/usersSlice";
-import { updateTaskStatus } from "../redux/tasksSlice";
+import {
+  updateTaskStatus,
+  updateTaskTitle,
+} from "../redux/tasksSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -24,8 +27,9 @@ const NavBar = () => {
     }
   }, [dispatch, userId, taskStatus]);
 
-  const handleOnClick = (status) => {
+  const handleOnClick = (status, newTitle = "Active Tasks") => {
     dispatch(updateTaskStatus(status));
+    dispatch(updateTaskTitle(newTitle));
   };
 
   return (
@@ -49,13 +53,17 @@ const NavBar = () => {
             </Link>
             <Link
               className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
-              onClick={() => handleOnClick("completed")}
+              onClick={() =>
+                handleOnClick("completed", "Completed Tasks")
+              }
             >
               Completed Tasks
             </Link>
             <Link
               className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
-              onClick={() => handleOnClick("deleted")}
+              onClick={() =>
+                handleOnClick("deleted", "Deleted Tasks")
+              }
             >
               Deleted Tasks
             </Link>

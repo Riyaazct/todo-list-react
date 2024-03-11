@@ -16,6 +16,7 @@ const initialState = {
   tasks: [],
   status: "idle",
   taskStatus: "active",
+  taskTitle: "Tasks",
   error: null,
 };
 
@@ -25,6 +26,9 @@ const tasksSlice = createSlice({
   reducers: {
     updateTaskStatus: (state, action) => {
       state.taskStatus = action.payload;
+    },
+    updateTaskTitle: (state, action) => {
+      state.taskTitle = action.payload;
     },
   },
   extraReducers(builder) {
@@ -43,6 +47,7 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { updateTaskStatus } = tasksSlice.actions;
+export const { updateTaskStatus, updateTaskTitle } =
+  tasksSlice.actions;
 
 export default tasksSlice.reducer;
