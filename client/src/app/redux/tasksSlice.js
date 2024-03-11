@@ -16,7 +16,7 @@ const initialState = {
   tasks: [],
   status: "idle",
   taskStatus: "active",
-  taskTitle: "Tasks",
+  taskTitle: "Active Tasks",
   error: null,
 };
 
