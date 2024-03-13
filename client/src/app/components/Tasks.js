@@ -74,7 +74,7 @@ const Tasks = () => {
         ))}
       </div>
       {/* IF TASKS EXIST, SHOW BUTTON, ELSE DON'T */}
-      {tasks.length !== 0 && <ClearList />}
+      {taskStatus === "active" && tasks.length !== 0 && <ClearList />}
     </div>
   );
 };
