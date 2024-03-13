@@ -47,6 +47,8 @@ const tasksSlice = createSlice({
   },
 });
 
+export const selectTaskStatus = (state) => state.tasks.taskStatus;
+
 export const { updateTaskStatus, updateTaskTitle } =
   tasksSlice.actions;
 
