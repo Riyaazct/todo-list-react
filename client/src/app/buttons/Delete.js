@@ -22,7 +22,13 @@ const Delete = ({ id, userId }) => {
   };
 
   return (
-    <div className={taskStatus === "deleted" ? "hidden" : "block"}>
+    <div
+      className={
+        taskStatus === "deleted" || taskStatus === "completed"
+          ? "hidden"
+          : "block"
+      }
+    >
       <FiDelete size={25} onClick={handleDelete} />
     </div>
   );

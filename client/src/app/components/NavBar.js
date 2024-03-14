@@ -45,28 +45,45 @@ const NavBar = () => {
             <Link className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5">
               Categories
             </Link>
-            <Link
-              className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5"
-              onClick={() => handleOnClick("active")}
-            >
-              Active Tasks
-            </Link>
-            <Link
-              className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
-              onClick={() =>
-                handleOnClick("completed", "Completed Tasks")
-              }
-            >
-              Completed Tasks
-            </Link>
-            <Link
-              className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
-              onClick={() =>
-                handleOnClick("deleted", "Deleted Tasks")
-              }
-            >
-              Deleted Tasks
-            </Link>
+
+            {taskStatus !== "active" && (
+              <Link
+                className="p-1 text-2xl text-gray-900 md:text-xl md:mx-5"
+                onClick={() => handleOnClick("active")}
+              >
+                Active Tasks
+              </Link>
+            )}
+            {taskStatus !== "completed" && (
+              <Link
+                className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
+                onClick={() =>
+                  handleOnClick("completed", "Completed Tasks")
+                }
+              >
+                Completed Tasks
+              </Link>
+            )}
+            {taskStatus !== "deleted" && (
+              <Link
+                className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
+                onClick={() =>
+                  handleOnClick("deleted", "Deleted Tasks")
+                }
+              >
+                Deleted Tasks
+              </Link>
+            )}
+            {taskStatus !== "archived" && (
+              <Link
+                className="p-1 text-2xl text-gray-900 md:text-xl md:ml-5"
+                onClick={() =>
+                  handleOnClick("archived", "Archived Tasks")
+                }
+              >
+                Archived Tasks
+              </Link>
+            )}
           </div>
         )}
         <div className="flex justify-center gap-1">

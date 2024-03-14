@@ -34,15 +34,11 @@ CREATE TABLE users (
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
+    task_status VARCHAR(50) DEFAULT 'active' NOT NULL;
     task VARCHAR(500) NOT NULL,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
-
-
-
-
 
 
 select * from users;
