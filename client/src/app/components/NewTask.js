@@ -47,14 +47,14 @@ const NewTask = () => {
             onChange={(e) => setCaptured(e.target.value)}
             autoFocus
           />
+          <button
+            className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
+            type="submit"
+            // onClick={handleSubmit}
+          >
+            Add Task
+          </button>
         </form>
-        <button
-          className="w-full mt-2 hover:bg-gray-800 hover:border-blue-700 hover:text-blue-700"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Add Task
-        </button>
       </div>
     </div>
   );

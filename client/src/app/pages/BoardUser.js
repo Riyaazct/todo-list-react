@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
 import NewTask from "../components/NewTask";
 import Tasks from "../components/Tasks";
+import { selectTaskStatus } from "../redux/tasksSlice";
 
 const BoardUser = () => {
   const [content, setContent] = useState("");
+
+  const isActiveTask = useSelector(selectTaskStatus);
 
   useEffect(() => {
     UserService.getUserBoard().then(
@@ -35,7 +39,7 @@ const BoardUser = () => {
     <div className="max-w-[90%] xl:max-w-[1200px] m-auto">
       {!content && (
         <div>
-          <NewTask />
+          {isActiveTask === "active" && <NewTask />}
           <Tasks />
         </div>
       )}
