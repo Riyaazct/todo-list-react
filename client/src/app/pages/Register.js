@@ -34,7 +34,9 @@ const Register = () => {
         .then((response) => {
           setMessage(response.data.message);
           setSuccessful(true);
-          navigate("/login");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         })
         .catch((error) => {
           const errorMessage =
