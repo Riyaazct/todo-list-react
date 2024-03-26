@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../services/auth.service";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [successful, setSuccessful] = useState("");
   const [message, setMessage] = useState("");
 
@@ -31,6 +34,7 @@ const Register = () => {
         .then((response) => {
           setMessage(response.data.message);
           setSuccessful(true);
+          navigate("/login");
         })
         .catch((error) => {
           const errorMessage =
