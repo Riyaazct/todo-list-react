@@ -20,13 +20,13 @@ const RecruiterLoginButton = () => {
 
   return (
     <div className="flex justify-center p-2">
-      <p>Recruiters log in</p>
-      <button
+      <p>Recruiter log in</p>
+      <div
         className="ml-2 text-blue-600 cursor-pointer"
         onClick={recruiterLogin}
       >
         here
-      </button>
+      </div>
     </div>
   );
 };
