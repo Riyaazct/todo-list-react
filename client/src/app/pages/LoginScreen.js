@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
+import RecruiterLoginButton from "../components/RecruiterLoginButton";
 
 const LoginScreen = () => {
   const [loading, setLoading] = useState("");
@@ -115,6 +116,7 @@ const LoginScreen = () => {
             <Link to="/register">Sign Up</Link>
           </span>
         </p>
+        <RecruiterLoginButton />
       </div>
     </div>
   );
