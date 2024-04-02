@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
 import RecruiterLoginButton from "../components/RecruiterLoginButton";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 const LoginScreen = () => {
   const [loading, setLoading] = useState("");
@@ -117,6 +118,7 @@ const LoginScreen = () => {
           </span>
         </p>
         <RecruiterLoginButton />
+        <GoogleLoginButton />
       </div>
     </div>
   );
