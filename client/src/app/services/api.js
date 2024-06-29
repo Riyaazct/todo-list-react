@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const instance = axios.create({
   baseURL: isDevelopment
     ? "http://localhost:3100/api"
-    : "https://long-ruby-dhole-hat.cyclic.app/api",
+    : "https://api.todo.riyaazscodecraft.co.za",
   headers: {
     "Content-Type": "application/json",
   },
