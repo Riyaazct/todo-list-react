@@ -22,11 +22,12 @@ const RecruiterLoginButton = () => {
     <div className="flex justify-center p-2">
       <p>Recruiter log in</p>
       <div
-        className="ml-2 text-blue-600 cursor-pointer"
+        className="ml-1 text-blue-600 cursor-pointer"
         onClick={recruiterLogin}
       >
         here
       </div>
+      <p className="ml-1">for quick access.</p>
     </div>
   );
 };

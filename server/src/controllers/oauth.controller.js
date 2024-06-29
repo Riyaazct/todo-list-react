@@ -57,5 +57,5 @@ exports.oAuth = async (req, res) => {
     console.log("Error with signing in with Google", err);
   }
 
-  res.redirect(303, "http://localhost:3000/");
+  res.redirect(303, "http://localhost:3000/user");
 };
