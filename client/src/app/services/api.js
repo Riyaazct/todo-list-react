@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const instance = axios.create({
   baseURL: isDevelopment
     ? "http://localhost:3100/api"
-    : "https://todo-server-eight-theta.vercel.app/api",
+    : "https://todo.riyaazscodecraft.co.za/api", //"https://todo-server-eight-theta.vercel.app/api",
   headers: {
     "Content-Type": "application/json",
   },
